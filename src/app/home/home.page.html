@@ -1,0 +1,20 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-title>
+      NVS Meeting
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <div id="container">
+    <div *ngIf="!user.user">
+      <strong>Faça o login abaixo</strong><br>
+      <ion-button color="primary" (click)="signIn()">Login</ion-button>
+    </div>
+    <br><br>
+    <div *ngIf="user.user">
+      Bem-vindo {{ user.user.displayName }}!
+    </div>
+  </div>
+</ion-content>

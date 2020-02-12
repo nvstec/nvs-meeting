@@ -1,0 +1,7 @@
+{
+  "name": "nvsMeeting",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
