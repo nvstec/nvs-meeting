@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MSAdal, AuthenticationContext, AuthenticationResult } from '@ionic-native/ms-adal/ngx';
 import { LoadingController } from '@ionic/angular';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Router, NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -18,7 +19,8 @@ export class HomePage {
   constructor(
     private msAdal: MSAdal,
     private loadingCtrl: LoadingController,
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
   ) {
   }
 
@@ -35,11 +37,17 @@ export class HomePage {
     authContext.acquireTokenAsync('https://graph.microsoft.com', '03d4b82a-06df-4c21-99bd-ee5fec338c1f', 'com.nvstec.app.nvsmeeting://home','','')
     .then((authResponse: AuthenticationResult) => {
       this.token = authResponse.accessToken;
-      this.http.get("https://graph.microsoft.com/v1.0/me",{
-        headers: new HttpHeaders({"Authorization": "Bearer "+ authResponse.accessToken})
+      console.log("token",this.token);
+      this.http.get("https://graph.microsoft.com/beta/me/findRooms",{
+        headers: new HttpHeaders({"Authorization": "Bearer "+ authResponse.accessToken,"Content-Type":"application/json"})
       }).subscribe(res => {
         loading.dismiss();
-        this.user = res;
+        let navigationExtras: NavigationExtras = {
+          state: {
+            rooms: res["value"]
+          }
+        }
+        this.router.navigate(['/rooms-list'],navigationExtras);
       })
     })
     .catch((e: any) => console.log('Authentication failed', e));
