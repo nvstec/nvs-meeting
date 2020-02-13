@@ -15,6 +15,8 @@
     <br><br>
     <div *ngIf="user">
       Bem-vindo {{ user.displayName }}!
+      <br>
+      <ion-button color="primary" (click)="getEvents()">Buscar eventos</ion-button>
     </div>
   </div>
 </ion-content>
