@@ -13,8 +13,8 @@
       <ion-button color="primary" (click)="signIn()">Login</ion-button>
     </div>
     <br><br>
-    <div *ngIf="user.user">
-      Bem-vindo {{ user.user.displayName }}!
+    <div *ngIf="user">
+      Bem-vindo {{ user.displayName }}!
     </div>
   </div>
 </ion-content>
