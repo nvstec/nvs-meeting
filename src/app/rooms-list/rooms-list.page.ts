@@ -47,6 +47,7 @@ export class RoomsListPage implements OnInit {
       let navigationExtras: NavigationExtras = {
         state: {
           roomName: room.name,
+          roomEmail: room.address,
           roomEvents: res["value"],
           token: this.token
         }
