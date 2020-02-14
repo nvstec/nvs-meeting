@@ -44,7 +44,8 @@ export class HomePage {
         loading.dismiss();
         let navigationExtras: NavigationExtras = {
           state: {
-            rooms: res["value"]
+            rooms: res["value"],
+            token: this.token
           }
         }
         this.router.navigate(['/rooms-list'],navigationExtras);
