@@ -12,6 +12,8 @@ export class RoomEventsPage implements OnInit {
 
   obj: any;
   token: any;
+  clock: any = new Date();
+  timer: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -29,6 +31,12 @@ export class RoomEventsPage implements OnInit {
   }
 
   ngOnInit() {
+    this.timer = setInterval(() => {
+      this.clock = new Date();
+    }, 60000);
   }
 
+  ngOnDestroy(){
+    clearInterval(this.timer);
+  }
 }

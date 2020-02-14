@@ -14,6 +14,11 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { OAuthSettings } from '../oauth';
+import {LOCALE_ID} from '@angular/core';
+import localePt from '@angular/common/locales/pt'
+
+import { registerLocaleData } from '@angular/common';
+registerLocaleData(localePt);
 
 @NgModule({
   declarations: [AppComponent],
@@ -32,6 +37,7 @@ import { OAuthSettings } from '../oauth';
     MSAdal,
     SplashScreen,
     ScreenOrientation,
+    { provide: LOCALE_ID, useValue: "pt" },
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
