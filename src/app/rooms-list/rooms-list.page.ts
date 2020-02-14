@@ -46,6 +46,7 @@ export class RoomsListPage implements OnInit {
       loading.dismiss();
       let navigationExtras: NavigationExtras = {
         state: {
+          roomName: room.name,
           roomEvents: res["value"],
           token: this.token
         }

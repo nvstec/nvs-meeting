@@ -12,15 +12,17 @@
       <ion-col class="custom-col-room-events" size="6">
         <div>
           <img class="logo-room-events" src="../../assets/nvstec-padrao.png">
+          <ion-label class="txt-room-name-room-events">{{ roomName }}</ion-label>
           <br>
           <br>
-          <ion-label class="txt-next-events-room-events">Próximos eventos:</ion-label>
+          <ion-label class="txt-next-events-room-events">Eventos de hoje :</ion-label>
           <br>
           <br>
-          <ion-label class="txt-next-events-room-events">15h00 - 17h00 Reunião NVSTEC</ion-label>
-          <br>
-          <br>
-          <ion-label class="txt-next-events-room-events">17h00 - 19h00 Reunião NVSTEC 2</ion-label>
+          <div *ngFor="let event of todayEventsArray">
+            <ion-label class="txt-next-events-room-events">{{event.formattedStartHour}}h{{event.formattedStartMinutes}} - {{event.formattedEndHour}}h{{event.formattedEndMinutes}}: {{ event.subject }}</ion-label>
+            <br>
+            <br>
+          </div>
         </div>
       </ion-col>
     </ion-row>
