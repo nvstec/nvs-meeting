@@ -4,9 +4,9 @@
     .custom-row-room-events{
         height: 100vh;
 
-        .left-container-room-events{
+        .left-container-free-room-events{
             background-color: #124572;
-            height: 100%;
+            height: 100vh;
         
             .txt-clock-room-events{
                 display: block;
@@ -23,14 +23,36 @@
                 color: white;
                 text-align: center;
             }
-            .txt-room-next-meeting-room-events{
+        }
+        
+        .left-container-busy-room-events{
+            background-color: red;
+            height: 100vh;
+        
+            .txt-clock-room-events{
+                display: block;
+                font-size: 1.5em;
+                color: white;
+                padding-left: 5%;
+                padding-top: 5%;
+            }
+
+            .txt-room-status-room-events{
+                display: block;
+                padding-top: 35%;
+                font-size: 2em;
+                color: white;
+                text-align: center;
+            }
+
+            .txt-room-description-room-event{
                 display: block;
                 font-size: 1.5em;
                 color: white;
                 text-align: center;
             }
         }
-        
+
         .logo-room-events{
             width: 100%;
             height: 70%;
