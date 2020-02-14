@@ -7,6 +7,10 @@ const routes: Routes = [
     path: 'rooms-list',
     loadChildren: () => import('./rooms-list/rooms-list.module').then( m => m.RoomsListPageModule)
   },
+  {
+    path: 'room-events',
+    loadChildren: () => import('./room-events/room-events.module').then( m => m.RoomEventsPageModule)
+  },
 
 ];
 

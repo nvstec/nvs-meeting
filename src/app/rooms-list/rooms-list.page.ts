@@ -44,12 +44,13 @@ export class RoomsListPage implements OnInit {
     }).subscribe(res => {
       console.log("res",res);
       loading.dismiss();
-      // let navigationExtras: NavigationExtras = {
-      //   state: {
-      //     selectedRoom: room
-      //   }
-      // }
-      // this.router.navigate(['/rooms-list'],navigationExtras);
+      let navigationExtras: NavigationExtras = {
+        state: {
+          roomEvents: res["value"],
+          token: this.token
+        }
+      }
+      this.router.navigate(['/room-events'],navigationExtras);
     }, err =>{
       console.log("erro", err);
       loading.dismiss();

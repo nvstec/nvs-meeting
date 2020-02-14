@@ -4,6 +4,7 @@ import { RouteReuseStrategy } from '@angular/router';
 import { MsalModule } from '@azure/msal-angular';
 import { MSAdal, AuthenticationContext, AuthenticationResult } from '@ionic-native/ms-adal/ngx';
 import { HttpClientModule } from '@angular/common/http'
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -30,6 +31,7 @@ import { OAuthSettings } from '../oauth';
     StatusBar,
     MSAdal,
     SplashScreen,
+    ScreenOrientation,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
