@@ -23,6 +23,7 @@ export class RoomEventsPage implements OnInit {
       if (this.router.getCurrentNavigation().extras.state) {
         this.obj = this.router.getCurrentNavigation().extras.state.roomEvents;
         this.token = this.router.getCurrentNavigation().extras.state.token;
+        console.log("obj",this.obj);
       }
     });
   }
