@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LoadingController, AlertController } from '@ionic/angular';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-room-events',
@@ -49,8 +50,8 @@ export class RoomEventsPage implements OnInit {
       this.timer2 = setInterval(() => {
         this.refreshTodayEventsArray();
         this.checkMeetingNow(this.obj);
-      }, 60000);
-    }, 60000);
+      }, 40000);
+    }, 40000);
   }
 
   ngOnDestroy(){
@@ -73,7 +74,7 @@ export class RoomEventsPage implements OnInit {
     array.forEach(element => {
       let dateStartParsed = new Date(element.start.dateTime);
       let dateEndParsed = new Date(element.end.dateTime);
-      if(dateStartParsed.getDate() == now.getDate() && dateStartParsed.getMonth() == now.getMonth() && dateStartParsed.getFullYear() == now.getFullYear() && dateStartParsed.getHours()-3 >= now.getHours()+1){
+      if(!element.isCancelled && dateStartParsed.getDate() == now.getDate() && dateStartParsed.getMonth() == now.getMonth() && dateStartParsed.getFullYear() == now.getFullYear() && dateStartParsed.getHours()-3 >= now.getHours()+1){
         if(dateStartParsed.getHours()-3 == now.getHours()+1){
           if(dateStartParsed.getMinutes() > now.getMinutes()){
             let formattedStartHour;
@@ -166,11 +167,10 @@ export class RoomEventsPage implements OnInit {
     this.http.get(url,{
       headers: new HttpHeaders({"Authorization": "Bearer "+ this.token,"Content-Type":"application/json"})
     }).subscribe(res => {
-      console.log("wololo",res);
       res["value"].forEach(element => {
         let dateStartParsed = new Date(element.start.dateTime);
         let dateEndParsed = new Date(element.end.dateTime);
-        if(dateStartParsed.getDate() == now.getDate() && dateStartParsed.getMonth() == now.getMonth() && dateStartParsed.getFullYear() == now.getFullYear() && dateStartParsed.getHours()-3 >= now.getHours()+1){
+        if(!element.isCancelled && dateStartParsed.getDate() == now.getDate() && dateStartParsed.getMonth() == now.getMonth() && dateStartParsed.getFullYear() == now.getFullYear() && dateStartParsed.getHours()-3 >= now.getHours()+1){
           if(dateStartParsed.getHours()-3 == now.getHours()+1){
             if(dateStartParsed.getMinutes() > now.getMinutes()){
               let formattedStartHour;
@@ -260,55 +260,57 @@ export class RoomEventsPage implements OnInit {
   }
 
   checkMeetingNow(array:any){
-    console.log("chamou checkMeetingNow");
+    let foundMeeting = false;
     let now = new Date();
     array.forEach(element => {
       let dateStartParsed = new Date(element.start.dateTime);
       let dateEndParsed = new Date(element.end.dateTime);
-      if(dateStartParsed.getDate() == now.getDate() && dateStartParsed.getMonth() == now.getMonth() && dateStartParsed.getFullYear() == now.getFullYear()){
-        if(dateStartParsed.getHours()-3 == now.getHours()+1){
-          if(dateStartParsed.getMinutes() <= now.getMinutes()){
-            let formattedStartHour;
-            let formattedStartMinute;
-            let formattedEndHour;
-            let formattedEndMinute;
-            if(dateStartParsed.getHours()-3 == 0){
-              formattedStartHour = "00";
-            }
-            else{
-              formattedStartHour = dateStartParsed.getHours()-3;
-            }
-            if(dateEndParsed.getHours()-3 == 0){
-              formattedEndHour = "00";
-            }
-            else{
-              formattedEndHour = dateEndParsed.getHours()-3;
-            }
-            if(dateStartParsed.getMinutes() == 0){
-              formattedStartMinute = "00";
-            }
-            else{
-              formattedStartMinute = dateStartParsed.getMinutes();
-            }
-            if(dateEndParsed.getMinutes() == 0){
-              formattedEndMinute = "00";
-            }
-            else{
-              formattedEndMinute = dateEndParsed.getMinutes()
-            }
-            let obj = {
-              subject: element.subject,
-              formattedStartHour: formattedStartHour,
-              formattedStartMinutes: formattedStartMinute,
-              formattedEndHour: formattedEndHour,
-              formattedEndMinutes: formattedEndMinute
-            }
-            this.currentMeeting = obj;
-            return;
-          }
+      let meetingStart = moment(element.start.dateTime).subtract(3,'h').format();
+      let meetingEnd = moment(element.end.dateTime).subtract(3,'h').format();
+      let nowFormatted = moment(now).add(1,'h').format();
+
+      if(!element.isCancelled && nowFormatted > meetingStart && nowFormatted < meetingEnd){
+        let formattedStartHour;
+        let formattedStartMinute;
+        let formattedEndHour;
+        let formattedEndMinute;
+        if(dateStartParsed.getHours()-3 == 0){
+          formattedStartHour = "00";
         }
+        else{
+          formattedStartHour = dateStartParsed.getHours()-3;
+        }
+        if(dateEndParsed.getHours()-3 == 0){
+          formattedEndHour = "00";
+        }
+        else{
+          formattedEndHour = dateEndParsed.getHours()-3;
+        }
+        if(dateStartParsed.getMinutes() == 0){
+          formattedStartMinute = "00";
+        }
+        else{
+          formattedStartMinute = dateStartParsed.getMinutes();
+        }
+        if(dateEndParsed.getMinutes() == 0){
+          formattedEndMinute = "00";
+        }
+        else{
+          formattedEndMinute = dateEndParsed.getMinutes()
+        }
+        let obj = {
+          subject: element.subject,
+          formattedStartHour: formattedStartHour,
+          formattedStartMinutes: formattedStartMinute,
+          formattedEndHour: formattedEndHour,
+          formattedEndMinutes: formattedEndMinute
+        }
+        this.currentMeeting = obj;
+        foundMeeting = true;
       }
     });
-    this.currentMeeting = null;
+    if(!foundMeeting){
+      this.currentMeeting = null;
+    }
   }
 }
