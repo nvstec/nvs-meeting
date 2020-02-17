@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
+import { MSAdal, AuthenticationContext, AuthenticationResult } from '@ionic-native/ms-adal/ngx';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LoadingController, AlertController } from '@ionic/angular';
 import * as moment from 'moment';
@@ -22,6 +23,7 @@ export class RoomEventsPage implements OnInit {
   currentMeeting: any = null;
 
   constructor(
+    private msAdal: MSAdal,
     private route: ActivatedRoute,
     private alertCtrl: AlertController,
     private router: Router,
@@ -157,7 +159,12 @@ export class RoomEventsPage implements OnInit {
     let now = new Date();
     let newEventsArray = [];
 
-    let url = "https://graph.microsoft.com/v1.0/users/"+this.roomEmail+"/events";
+    let authContext: AuthenticationContext = this.msAdal.createAuthenticationContext('https://login.windows.net/common');
+
+    authContext.acquireTokenSilentAsync('https://graph.microsoft.com', '03d4b82a-06df-4c21-99bd-ee5fec338c1f','').then((authResponse: AuthenticationResult) =>{
+      console.log("responseSilentToken",authResponse);
+      this.token = authResponse.accessToken;
+      let url = "https://graph.microsoft.com/v1.0/users/"+this.roomEmail+"/events";
 
     this.http.get(url,{
       headers: new HttpHeaders({"Authorization": "Bearer "+ this.token,"Content-Type":"application/json"})
@@ -254,6 +261,8 @@ export class RoomEventsPage implements OnInit {
       console.log("erro", err);
       this.presentErrorAlert();
     })
+    }
+    ).catch((e: any) => console.log('Authentication failed', e));
   }
 
   checkMeetingNow(array:any){
@@ -309,7 +318,7 @@ export class RoomEventsPage implements OnInit {
       }
     });
     if(!foundMeeting){
-      console.log("didnt found meeting right now");
+      console.log("didnt find meeting right now");
       this.currentMeeting = null;
     }
   }
