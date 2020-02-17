@@ -45,19 +45,13 @@ export class RoomEventsPage implements OnInit {
   ngOnInit() {
     this.timer = setInterval(() => {
       let now = new Date();
-      this.clock = moment(now).add( 1,'h').format();;
-    }, 60000);
-
-    setTimeout(()=>{
-      this.timer2 = setInterval(() => {
-        this.refreshTodayEventsArray();
-      }, 40000);
+      this.clock = moment(now).add( 1,'h').format();
+      this.refreshTodayEventsArray();
     }, 40000);
   }
 
   ngOnDestroy(){
     clearInterval(this.timer);
-    clearInterval(this.timer2);
   }
 
   async presentErrorAlert() {
@@ -270,11 +264,8 @@ export class RoomEventsPage implements OnInit {
       let dateStartParsed = new Date(element.start.dateTime);
       let dateEndParsed = new Date(element.end.dateTime);
       let meetingStart = moment(element.start.dateTime).subtract(3,'h').format();
-      console.log("meetingStart",meetingStart);
       let meetingEnd = moment(element.end.dateTime).subtract(3,'h').format();
-      console.log("meetingEnd",meetingEnd);
       let nowFormatted = moment(now).add( 1,'h').format();
-      console.log("time now",nowFormatted);
 
       if(!element.isCancelled && nowFormatted >= meetingStart && nowFormatted < meetingEnd){
         let formattedStartHour;
