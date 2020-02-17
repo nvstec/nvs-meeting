@@ -4,13 +4,13 @@
       <ion-col class="custom-col-room-events" size="6">
         <div *ngIf="!currentMeeting">
           <div class="left-container-free-room-events">
-            <ion-label class="txt-clock-room-events">{{clock | date:'HH:mm':'-0200':'pt'}}</ion-label>
+            <ion-label class="txt-clock-room-events">{{clock | date:'HH:mm'}}</ion-label>
               <ion-label class="txt-room-status-room-events">LIVRE</ion-label>
           </div>
         </div>
         <div *ngIf="currentMeeting">
           <div class="left-container-busy-room-events">
-            <ion-label class="txt-clock-room-events">{{clock | date:'HH:mm':'-0200':'pt'}}</ion-label>
+            <ion-label class="txt-clock-room-events">{{clock | date:'HH:mm'}}</ion-label>
               <ion-label class="txt-room-status-room-events">OCUPADO</ion-label>
               <br>
               <ion-label class="txt-room-description-room-event">{{currentMeeting.formattedStartHour}}h{{currentMeeting.formattedStartMinutes}} - {{currentMeeting.formattedEndHour}}h{{currentMeeting.formattedEndMinutes}}: {{ currentMeeting.subject }}</ion-label>

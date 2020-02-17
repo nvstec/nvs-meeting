@@ -30,6 +30,7 @@ export class RoomEventsPage implements OnInit {
   ) {
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
+        this.clock = moment(this.clock).add( 1,'h').format();
         this.obj = this.router.getCurrentNavigation().extras.state.roomEvents;
         this.token = this.router.getCurrentNavigation().extras.state.token;
         this.roomName = this.router.getCurrentNavigation().extras.state.roomName;
@@ -43,13 +44,13 @@ export class RoomEventsPage implements OnInit {
 
   ngOnInit() {
     this.timer = setInterval(() => {
-      this.clock = new Date();
+      let now = new Date();
+      this.clock = moment(now).add( 1,'h').format();;
     }, 60000);
 
     setTimeout(()=>{
       this.timer2 = setInterval(() => {
         this.refreshTodayEventsArray();
-        this.checkMeetingNow(this.obj);
       }, 40000);
     }, 40000);
   }
@@ -167,6 +168,7 @@ export class RoomEventsPage implements OnInit {
     this.http.get(url,{
       headers: new HttpHeaders({"Authorization": "Bearer "+ this.token,"Content-Type":"application/json"})
     }).subscribe(res => {
+      console.log("refreshed events",res["value"]);
       res["value"].forEach(element => {
         let dateStartParsed = new Date(element.start.dateTime);
         let dateEndParsed = new Date(element.end.dateTime);
@@ -253,6 +255,7 @@ export class RoomEventsPage implements OnInit {
       });
       newEventsArray.reverse();
       this.todayEventsArray = newEventsArray;
+      this.checkMeetingNow(res["value"]);
     }, err =>{
       console.log("erro", err);
       this.presentErrorAlert();
@@ -260,16 +263,20 @@ export class RoomEventsPage implements OnInit {
   }
 
   checkMeetingNow(array:any){
+    console.log("checking for event right now");
     let foundMeeting = false;
     let now = new Date();
     array.forEach(element => {
       let dateStartParsed = new Date(element.start.dateTime);
       let dateEndParsed = new Date(element.end.dateTime);
       let meetingStart = moment(element.start.dateTime).subtract(3,'h').format();
+      console.log("meetingStart",meetingStart);
       let meetingEnd = moment(element.end.dateTime).subtract(3,'h').format();
-      let nowFormatted = moment(now).add(1,'h').format();
+      console.log("meetingEnd",meetingEnd);
+      let nowFormatted = moment(now).add( 1,'h').format();
+      console.log("time now",nowFormatted);
 
-      if(!element.isCancelled && nowFormatted > meetingStart && nowFormatted < meetingEnd){
+      if(!element.isCancelled && nowFormatted >= meetingStart && nowFormatted < meetingEnd){
         let formattedStartHour;
         let formattedStartMinute;
         let formattedEndHour;
@@ -307,9 +314,11 @@ export class RoomEventsPage implements OnInit {
         }
         this.currentMeeting = obj;
         foundMeeting = true;
+        console.log("found meeting right now");
       }
     });
     if(!foundMeeting){
+      console.log("didnt found meeting right now");
       this.currentMeeting = null;
     }
   }
