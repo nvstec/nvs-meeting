@@ -7,35 +7,35 @@
 <ion-content class="ion-padding">
   <ion-item>
     <ion-label position="floating">Nome do evento</ion-label>
-    <ion-input></ion-input>
+    <ion-input type="text" [(ngModel)]="eventName"></ion-input>
   </ion-item>
   <ion-list>
-    <ion-radio-group value="duration">
+    <ion-radio-group value="duration" [(ngModel)]="eventDuration" (ionChange)="checkBtnEnabled($event)">
       <ion-list-header>
         <ion-label>Duração</ion-label>
       </ion-list-header>
   
       <ion-item lines="none">
         <ion-label>15 minutos</ion-label>
-        <ion-radio slot="start" value="15m"></ion-radio>
+        <ion-radio slot="start" value="15"></ion-radio>
       </ion-item>
   
       <ion-item lines="none">
         <ion-label>30 minutos</ion-label>
-        <ion-radio slot="start" value="30m"></ion-radio>
+        <ion-radio slot="start" value="30"></ion-radio>
       </ion-item>
   
       <ion-item lines="none">
         <ion-label>45 minutos</ion-label>
-        <ion-radio slot="start" value="45m"></ion-radio>
+        <ion-radio slot="start" value="45"></ion-radio>
       </ion-item>
 
       <ion-item lines="none">
         <ion-label>1 hora</ion-label>
-        <ion-radio slot="start" value="60m"></ion-radio>
+        <ion-radio slot="start" value="60"></ion-radio>
       </ion-item>
     </ion-radio-group>
   </ion-list>
   <br>
-  <ion-button class="btn-agendar-room-events-modal" (click)="bookClicked()">AGENDAR</ion-button>
+  <ion-button class="btn-agendar-room-events-modal" (click)="bookClicked()" [disabled]="isBookBtnDisabled">AGENDAR</ion-button>
 </ion-content>

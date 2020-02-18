@@ -330,9 +330,15 @@ export class RoomEventsPage implements OnInit {
     let modal = await this.modalCtrl.create({
       component: RoomEventsModalPage,
       componentProps: {
-        token: this.token
+        token: this.token,
+        roomName: this.roomName,
+        roomEmail: this.roomEmail
       },
       cssClass: 'custom-room-events-modal'
+    });
+
+    modal.onDidDismiss().then((res) => {
+      console.log("fechou o modal");
     });
     return await modal.present();
   }
