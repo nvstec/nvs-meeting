@@ -338,7 +338,9 @@ export class RoomEventsPage implements OnInit {
     });
 
     modal.onDidDismiss().then((res) => {
-      console.log("fechou o modal");
+      let now = new Date();
+      this.clock = moment(now).add( 1,'h').format();
+      this.refreshTodayEventsArray();
     });
     return await modal.present();
   }

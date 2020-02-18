@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, AlertController } from '@ionic/angular';
+import { MSAdal, AuthenticationContext, AuthenticationResult } from '@ionic-native/ms-adal/ngx';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import * as moment from 'moment';
 
 @Component({
@@ -19,15 +21,15 @@ export class RoomEventsModalPage implements OnInit {
   isBookBtnDisabled: boolean = true;
 
   constructor(
-    public modalCtrl: ModalController
+    public modalCtrl: ModalController,
+    private msAdal: MSAdal,
+    private alertCtrl: AlertController,
+    private http: HttpClient
     ) {
 
     }
 
   ngOnInit() {
-    console.log("token: ", this.token);
-    console.log("roomName: ", this.roomName);
-    console.log("roomEmail: ", this.roomEmail);
   }
 
   checkBtnEnabled(value){
@@ -36,13 +38,74 @@ export class RoomEventsModalPage implements OnInit {
     }
   }
 
+  async presentErrorAlert() {
+    const alert = await this.alertCtrl.create({
+      header: 'Erro!',
+      message: 'Ocorreu um erro ao agendar o evento, tente novamente. Se o problema insistir contate o Administrador.',
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
+
   bookClicked(){
     let now = new Date();
     let nowFormatted = moment(now).add( 1,'h').format();
-    console.log("chamar a api aqui");
-    console.log("name: ",this.eventName);
-    console.log("duration: ",this.eventDuration);
-    console.log("nowFormatted: ",nowFormatted);
-    this.modalCtrl.dismiss();
+    let temp = moment(now).add( 1,'h');
+    let endFormatted = temp.add(this.eventDuration,'m').format();
+
+    let authContext: AuthenticationContext = this.msAdal.createAuthenticationContext('https://login.windows.net/common');
+
+    authContext.acquireTokenSilentAsync('https://graph.microsoft.com', '03d4b82a-06df-4c21-99bd-ee5fec338c1f','').then((authResponse: AuthenticationResult) => {
+      console.log("responseSilentToken",authResponse);
+      this.token = authResponse.accessToken;
+      let url = "https://graph.microsoft.com/v1.0/me/events";
+
+      let body = {
+        subject: this.eventName,
+        start: {
+          dateTime: nowFormatted,
+          timeZone: "America/Sao_Paulo"
+        },
+        end: {
+          dateTime: endFormatted,
+          timeZone: "America/Sao_Paulo"
+        },
+        location: {
+          displayName: this.roomName,
+          locationEmailAddress: this.roomEmail
+        },
+        attendees: [
+          {
+            emailAddress: {
+              address: authResponse.userInfo.uniqueId,
+              name: authResponse.userInfo.displayableId
+            },
+            type: "required"
+          },
+          {
+            emailAddress: {
+              address: this.roomEmail,
+              name: this.roomName
+            },
+            type: "resource"
+          }
+        ]
+      }
+
+      this.http.post(url, body, {
+        headers: new HttpHeaders({"Authorization": "Bearer "+ this.token,"Content-Type":"application/json"})
+      }).subscribe(res => {
+        console.log("response: ", res);
+        this.modalCtrl.dismiss();
+      }, err =>{
+        console.log("erro", err);
+        this.presentErrorAlert();
+      })
+      }
+    ).catch((e: any) => {
+      this.presentErrorAlert();
+      console.log('Authentication failed', e);
+    });
   }
 }
