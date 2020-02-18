@@ -13,6 +13,8 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
+import { RoomEventsModalPageModule } from './room-events-modal/room-events-modal.module';
+
 import { OAuthSettings } from '../oauth';
 import {LOCALE_ID} from '@angular/core';
 import localePt from '@angular/common/locales/pt'
@@ -28,6 +30,7 @@ registerLocaleData(localePt);
     IonicModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
+    RoomEventsModalPageModule,
     MsalModule.forRoot({
       clientID: OAuthSettings.appId
     })

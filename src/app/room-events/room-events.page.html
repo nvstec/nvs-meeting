@@ -6,6 +6,7 @@
           <div class="left-container-free-room-events">
             <ion-label class="txt-clock-room-events">{{clock | date:'HH:mm'}}</ion-label>
               <ion-label class="txt-room-status-room-events">LIVRE</ion-label>
+              <ion-button class="btn-usar-room-event" (click)="useRoomClicked()">USAR</ion-button>
           </div>
         </div>
         <div *ngIf="currentMeeting">
@@ -13,7 +14,9 @@
             <ion-label class="txt-clock-room-events">{{clock | date:'HH:mm'}}</ion-label>
               <ion-label class="txt-room-status-room-events">OCUPADO</ion-label>
               <br>
-              <ion-label class="txt-room-description-room-event">{{currentMeeting.formattedStartHour}}h{{currentMeeting.formattedStartMinutes}} - {{currentMeeting.formattedEndHour}}h{{currentMeeting.formattedEndMinutes}}: {{ currentMeeting.subject }}</ion-label>
+              <ion-label class="txt-room-description-room-event">{{currentMeeting.formattedStartHour}}h{{currentMeeting.formattedStartMinutes}} - {{currentMeeting.formattedEndHour}}h{{currentMeeting.formattedEndMinutes}}</ion-label>
+              <br>
+              <ion-label class="txt-room-description-room-event">{{ currentMeeting.subject }}</ion-label>
           </div>
         </div>
       </ion-col>

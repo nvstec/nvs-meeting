@@ -11,6 +11,10 @@ const routes: Routes = [
     path: 'room-events',
     loadChildren: () => import('./room-events/room-events.module').then( m => m.RoomEventsPageModule)
   },
+  {
+    path: 'room-events-modal',
+    loadChildren: () => import('./room-events-modal/room-events-modal.module').then( m => m.RoomEventsModalPageModule)
+  },
 
 ];
 

@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import { MSAdal, AuthenticationContext, AuthenticationResult } from '@ionic-native/ms-adal/ngx';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { LoadingController, AlertController } from '@ionic/angular';
+import { LoadingController, AlertController, ModalController } from '@ionic/angular';
 import * as moment from 'moment';
+import { RoomEventsModalPage } from '../room-events-modal/room-events-modal.page';
 
 @Component({
   selector: 'app-room-events',
@@ -28,6 +29,7 @@ export class RoomEventsPage implements OnInit {
     private alertCtrl: AlertController,
     private router: Router,
     private http: HttpClient,
+    public modalCtrl: ModalController,
     private loadingCtrl: LoadingController
   ) {
     this.route.queryParams.subscribe(params => {
@@ -321,5 +323,17 @@ export class RoomEventsPage implements OnInit {
       console.log("didnt find meeting right now");
       this.currentMeeting = null;
     }
+  }
+
+  async useRoomClicked(){
+    console.log("clicou usar sala");
+    let modal = await this.modalCtrl.create({
+      component: RoomEventsModalPage,
+      componentProps: {
+        token: this.token
+      },
+      cssClass: 'custom-room-events-modal'
+    });
+    return await modal.present();
   }
 }

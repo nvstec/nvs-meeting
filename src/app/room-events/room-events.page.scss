@@ -23,11 +23,21 @@
                 color: white;
                 text-align: center;
             }
+
+            .btn-usar-room-event{
+                display: block;
+                position: absolute;
+                left: 43%;
+                bottom: 3%;
+                --background: white;
+                color: #124572;
+            }
         }
         
         .left-container-busy-room-events{
             background-color: red;
             height: 100vh;
+            position: relative;
         
             .txt-clock-room-events{
                 display: block;
