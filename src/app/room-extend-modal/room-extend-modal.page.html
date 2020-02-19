@@ -5,33 +5,69 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-list>
-    <ion-radio-group value="duration" [(ngModel)]="extendDuration" (ionChange)="checkBtnEnabled($event)">
-      <ion-list-header>
-        <ion-label>Extender por: </ion-label>
-      </ion-list-header>
+  <div *ngIf="nextEventStart">
+    <ion-list>
+      <ion-radio-group value="duration" [(ngModel)]="extendDuration" (ionChange)="checkBtnEnabled($event)">
+        <ion-list-header>
+          <ion-label>Extender por: </ion-label>
+        </ion-list-header>
+    
+        <ion-item lines="none">
+          <ion-label>15 minutos</ion-label>
+          <ion-radio slot="start" value="15"></ion-radio>
+        </ion-item>
+    
+        <ion-item lines="none">
+          <ion-label>30 minutos</ion-label>
+          <ion-radio slot="start" value="30"></ion-radio>
+        </ion-item>
+    
+        <ion-item lines="none">
+          <ion-label>45 minutos</ion-label>
+          <ion-radio slot="start" value="45"></ion-radio>
+        </ion-item>
   
-      <ion-item lines="none">
-        <ion-label>15 minutos</ion-label>
-        <ion-radio slot="start" value="15"></ion-radio>
-      </ion-item>
-  
-      <ion-item lines="none">
-        <ion-label>30 minutos</ion-label>
-        <ion-radio slot="start" value="30"></ion-radio>
-      </ion-item>
-  
-      <ion-item lines="none">
-        <ion-label>45 minutos</ion-label>
-        <ion-radio slot="start" value="45"></ion-radio>
-      </ion-item>
+        <ion-item lines="none">
+          <ion-label>1 hora</ion-label>
+          <ion-radio slot="start" value="60"></ion-radio>
+        </ion-item>
 
-      <ion-item lines="none">
-        <ion-label>1 hora</ion-label>
-        <ion-radio slot="start" value="60"></ion-radio>
-      </ion-item>
-    </ion-radio-group>
-  </ion-list>
+        <ion-item lines="none">
+          <ion-label>Até a próxima reunião</ion-label>
+          <ion-radio slot="start" value="90"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </ion-list>
+  </div>
+  <div *ngIf="!nextEventStart">
+    <ion-list>
+      <ion-radio-group value="duration" [(ngModel)]="extendDuration" (ionChange)="checkBtnEnabled($event)">
+        <ion-list-header>
+          <ion-label>Extender por: </ion-label>
+        </ion-list-header>
+    
+        <ion-item lines="none">
+          <ion-label>15 minutos</ion-label>
+          <ion-radio slot="start" value="15"></ion-radio>
+        </ion-item>
+    
+        <ion-item lines="none">
+          <ion-label>30 minutos</ion-label>
+          <ion-radio slot="start" value="30"></ion-radio>
+        </ion-item>
+    
+        <ion-item lines="none">
+          <ion-label>45 minutos</ion-label>
+          <ion-radio slot="start" value="45"></ion-radio>
+        </ion-item>
+  
+        <ion-item lines="none">
+          <ion-label>1 hora</ion-label>
+          <ion-radio slot="start" value="60"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </ion-list>
+  </div>
   <br>
   <ion-button class="btn-agendar-room-events-modal" (click)="extendClicked()" [disabled]="isExtendBtnDisabled">EXTENDER</ion-button>
 </ion-content>

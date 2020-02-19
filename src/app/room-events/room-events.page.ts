@@ -109,6 +109,7 @@ export class RoomEventsPage implements OnInit {
             }
             let temp = {
               subject: element.subject,
+              startHour: dateStartParsed,
               formattedStartHour: formattedStartHour,
               formattedStartMinutes: formattedStartMinute,
               formattedEndHour: formattedEndHour,
@@ -148,6 +149,7 @@ export class RoomEventsPage implements OnInit {
           }
           let temp = {
             subject: element.subject,
+            startHour: dateStartParsed,
             formattedStartHour: formattedStartHour,
             formattedStartMinutes: formattedStartMinute,
             formattedEndHour: formattedEndHour,
@@ -211,6 +213,7 @@ export class RoomEventsPage implements OnInit {
               }
               let temp = {
                 subject: element.subject,
+                startHour: dateStartParsed,
                 formattedStartHour: formattedStartHour,
                 formattedStartMinutes: formattedStartMinute,
                 formattedEndHour: formattedEndHour,
@@ -250,6 +253,7 @@ export class RoomEventsPage implements OnInit {
             }
             let temp = {
               subject: element.subject,
+              startHour: dateStartParsed,
               formattedStartHour: formattedStartHour,
               formattedStartMinutes: formattedStartMinute,
               formattedEndHour: formattedEndHour,
@@ -347,7 +351,7 @@ export class RoomEventsPage implements OnInit {
       let now = new Date();
       this.clock = moment(now).format();
       
-      if(res){
+      if(res.data){
         this.currentMeeting = res.data;
       }
     });
@@ -355,25 +359,47 @@ export class RoomEventsPage implements OnInit {
   }
 
   async extendRoomClicked(){
-    let modal = await this.modalCtrl.create({
-      component: RoomExtendModalPage,
-      componentProps: {
-        token: this.token,
-        roomName: this.roomName,
-        roomEmail: this.roomEmail,
-        eventName: this.currentMeeting.subject,
-        eventId: this.currentMeeting.eventId,
-        eventEnd: this.currentMeeting.eventEnd,
-        idCalendar: this.idCalendar
-      },
-      cssClass: 'custom-extend-events-modal'
-    });
+
+    let modal:any;
+
+    if(this.todayEventsArray.length > 0){
+      let nextEventStartTime = moment(this.todayEventsArray[0].startHour).subtract(3,'h').format();
+      modal = await this.modalCtrl.create({
+        component: RoomExtendModalPage,
+        componentProps: {
+          token: this.token,
+          roomName: this.roomName,
+          roomEmail: this.roomEmail,
+          eventName: this.currentMeeting.subject,
+          eventId: this.currentMeeting.eventId,
+          eventEnd: this.currentMeeting.eventEnd,
+          idCalendar: this.idCalendar,
+          nextEventStart: nextEventStartTime
+        },
+        cssClass: 'custom-extend-events-next-event-modal'
+      });
+    }
+    else{
+      modal = await this.modalCtrl.create({
+        component: RoomExtendModalPage,
+        componentProps: {
+          token: this.token,
+          roomName: this.roomName,
+          roomEmail: this.roomEmail,
+          eventName: this.currentMeeting.subject,
+          eventId: this.currentMeeting.eventId,
+          eventEnd: this.currentMeeting.eventEnd,
+          idCalendar: this.idCalendar,
+          nextEventStart: null
+        },
+        cssClass: 'custom-extend-events-modal'
+      });
+    }
 
     modal.onDidDismiss().then((res) => {
       let now = new Date();
       this.clock = moment(now).format();
-      
-      if(res){
+      if(res.data){
         this.currentMeeting = res.data;
       }
     });
