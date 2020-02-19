@@ -14,6 +14,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { RoomEventsModalPageModule } from './room-events-modal/room-events-modal.module';
+import { RoomExtendModalPageModule } from './room-extend-modal/room-extend-modal.module';
 
 import { OAuthSettings } from '../oauth';
 import {LOCALE_ID} from '@angular/core';
@@ -31,6 +32,7 @@ registerLocaleData(localePt);
     AppRoutingModule,
     HttpClientModule,
     RoomEventsModalPageModule,
+    RoomExtendModalPageModule,
     MsalModule.forRoot({
       clientID: OAuthSettings.appId
     })

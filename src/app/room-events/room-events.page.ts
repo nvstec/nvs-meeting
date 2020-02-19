@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LoadingController, AlertController, ModalController } from '@ionic/angular';
 import * as moment from 'moment';
 import { RoomEventsModalPage } from '../room-events-modal/room-events-modal.page';
+import { RoomExtendModalPage } from '../room-extend-modal/room-extend-modal.page';
 
 @Component({
   selector: 'app-room-events',
@@ -346,4 +347,18 @@ export class RoomEventsPage implements OnInit {
     });
     return await modal.present();
   }
+
+  async extendRoomClicked(){
+    let modal = await this.modalCtrl.create({
+      component: RoomExtendModalPage,
+      componentProps: {
+        token: this.token,
+        roomName: this.roomName,
+        roomEmail: this.roomEmail
+      },
+      cssClass: 'custom-extend-events-modal'
+    });
+    return await modal.present();
+  }
+  
 }
