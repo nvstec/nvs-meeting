@@ -37,22 +37,33 @@ export class RoomsListPage implements OnInit {
 
     await loading.present();
 
-    let url = "https://graph.microsoft.com/v1.0/users/"+room.address+"/events";
+    let urlCalendar = "https://graph.microsoft.com/v1.0/users/"+room.address+"/calendar";
 
-    this.http.get(url,{
-      headers: new HttpHeaders({"Authorization": "Bearer "+ this.token,"Content-Type":"application/json"})
-    }).subscribe(res => {
-      console.log("res",res);
-      loading.dismiss();
-      let navigationExtras: NavigationExtras = {
-        state: {
-          roomName: room.name,
-          roomEmail: room.address,
-          roomEvents: res["value"],
-          token: this.token
+    this.http.get(urlCalendar,{
+      headers: new HttpHeaders({"Authorization": "Bearer "+ this.token})
+    }).subscribe(resCalendar => {
+      console.log("resCalendar",resCalendar);
+      let url = "https://graph.microsoft.com/v1.0/users/"+room.address+"/events";
+
+      this.http.get(url,{
+        headers: new HttpHeaders({"Authorization": "Bearer "+ this.token,"Content-Type":"application/json"})
+      }).subscribe(res => {
+        console.log("resEvents",res);
+        loading.dismiss();
+        let navigationExtras: NavigationExtras = {
+          state: {
+            roomName: room.name,
+            roomEmail: room.address,
+            roomEvents: res["value"],
+            idCalendar: resCalendar["id"],
+            token: this.token
+          }
         }
-      }
-      this.router.navigate(['/room-events'],navigationExtras);
+        this.router.navigate(['/room-events'],navigationExtras);
+      }, err =>{
+        console.log("erro", err);
+        loading.dismiss();
+      })
     }, err =>{
       console.log("erro", err);
       loading.dismiss();

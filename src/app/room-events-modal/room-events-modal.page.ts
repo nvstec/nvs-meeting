@@ -14,6 +14,7 @@ export class RoomEventsModalPage implements OnInit {
   @Input() token:any;
   @Input() roomName:any;
   @Input() roomEmail:any;
+  @Input() idCalendar:any;
 
   eventName: any;
   eventDuration: any;
@@ -142,7 +143,9 @@ export class RoomEventsModalPage implements OnInit {
           formattedStartHour: formattedStartHour,
           formattedStartMinutes: formattedStartMinute,
           formattedEndHour: formattedEndHour,
-          formattedEndMinutes: formattedEndMinute
+          formattedEndMinutes: formattedEndMinute,
+          eventId: res["id"],
+          idCalendar: this.idCalendar
         }
 
         this.modalCtrl.dismiss(event);

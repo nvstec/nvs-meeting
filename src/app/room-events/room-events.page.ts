@@ -18,6 +18,8 @@ export class RoomEventsPage implements OnInit {
   token: any;
   roomName: any;
   roomEmail: any;
+  idCalendar: any;
+
   clock: any = new Date();
   timer: any;
   timer2: any;
@@ -40,7 +42,7 @@ export class RoomEventsPage implements OnInit {
         this.token = this.router.getCurrentNavigation().extras.state.token;
         this.roomName = this.router.getCurrentNavigation().extras.state.roomName;
         this.roomEmail = this.router.getCurrentNavigation().extras.state.roomEmail;
-        console.log("obj",this.obj);
+        this.idCalendar = this.router.getCurrentNavigation().extras.state.idCalendar;
         this.createTodayEventsArray(this.obj);
         this.checkMeetingNow(this.obj);
       }
@@ -251,7 +253,8 @@ export class RoomEventsPage implements OnInit {
               formattedStartHour: formattedStartHour,
               formattedStartMinutes: formattedStartMinute,
               formattedEndHour: formattedEndHour,
-              formattedEndMinutes: formattedEndMinute
+              formattedEndMinutes: formattedEndMinute,
+              eventId: element.id
             }
             newEventsArray.push(temp);
           }
@@ -313,7 +316,9 @@ export class RoomEventsPage implements OnInit {
           formattedStartHour: formattedStartHour,
           formattedStartMinutes: formattedStartMinute,
           formattedEndHour: formattedEndHour,
-          formattedEndMinutes: formattedEndMinute
+          formattedEndMinutes: formattedEndMinute,
+          eventEnd: meetingEnd,
+          eventId: element.id
         }
         this.currentMeeting = obj;
         foundMeeting = true;
@@ -332,7 +337,8 @@ export class RoomEventsPage implements OnInit {
       componentProps: {
         token: this.token,
         roomName: this.roomName,
-        roomEmail: this.roomEmail
+        roomEmail: this.roomEmail,
+        idCalendar: this.idCalendar
       },
       cssClass: 'custom-room-events-modal'
     });
@@ -354,10 +360,24 @@ export class RoomEventsPage implements OnInit {
       componentProps: {
         token: this.token,
         roomName: this.roomName,
-        roomEmail: this.roomEmail
+        roomEmail: this.roomEmail,
+        eventName: this.currentMeeting.subject,
+        eventId: this.currentMeeting.eventId,
+        eventEnd: this.currentMeeting.eventEnd,
+        idCalendar: this.idCalendar
       },
       cssClass: 'custom-extend-events-modal'
     });
+
+    modal.onDidDismiss().then((res) => {
+      let now = new Date();
+      this.clock = moment(now).format();
+      
+      if(res){
+        this.currentMeeting = res.data;
+      }
+    });
+
     return await modal.present();
   }
   
