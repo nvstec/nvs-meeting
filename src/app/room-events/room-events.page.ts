@@ -34,7 +34,7 @@ export class RoomEventsPage implements OnInit {
   ) {
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
-        this.clock = moment(this.clock).add( 1,'h').format();
+        this.clock = moment(this.clock).format();
         this.obj = this.router.getCurrentNavigation().extras.state.roomEvents;
         this.token = this.router.getCurrentNavigation().extras.state.token;
         this.roomName = this.router.getCurrentNavigation().extras.state.roomName;
@@ -49,7 +49,7 @@ export class RoomEventsPage implements OnInit {
   ngOnInit() {
     this.timer = setInterval(() => {
       let now = new Date();
-      this.clock = moment(now).add( 1,'h').format();
+      this.clock = moment(now).format();
       this.refreshTodayEventsArray();
     }, 40000);
   }
@@ -73,8 +73,8 @@ export class RoomEventsPage implements OnInit {
     array.forEach(element => {
       let dateStartParsed = new Date(element.start.dateTime);
       let dateEndParsed = new Date(element.end.dateTime);
-      if(!element.isCancelled && dateStartParsed.getDate() == now.getDate() && dateStartParsed.getMonth() == now.getMonth() && dateStartParsed.getFullYear() == now.getFullYear() && dateStartParsed.getHours()-3 >= now.getHours()+1){
-        if(dateStartParsed.getHours()-3 == now.getHours()+1){
+      if(!element.isCancelled && dateStartParsed.getDate() == now.getDate() && dateStartParsed.getMonth() == now.getMonth() && dateStartParsed.getFullYear() == now.getFullYear() && dateStartParsed.getHours()-3 >= now.getHours()){
+        if(dateStartParsed.getHours()-3 == now.getHours()){
           if(dateStartParsed.getMinutes() > now.getMinutes()){
             let formattedStartHour;
             let formattedStartMinute;
@@ -175,8 +175,8 @@ export class RoomEventsPage implements OnInit {
       res["value"].forEach(element => {
         let dateStartParsed = new Date(element.start.dateTime);
         let dateEndParsed = new Date(element.end.dateTime);
-        if(!element.isCancelled && dateStartParsed.getDate() == now.getDate() && dateStartParsed.getMonth() == now.getMonth() && dateStartParsed.getFullYear() == now.getFullYear() && dateStartParsed.getHours()-3 >= now.getHours()+1){
-          if(dateStartParsed.getHours()-3 == now.getHours()+1){
+        if(!element.isCancelled && dateStartParsed.getDate() == now.getDate() && dateStartParsed.getMonth() == now.getMonth() && dateStartParsed.getFullYear() == now.getFullYear() && dateStartParsed.getHours()-3 >= now.getHours()){
+          if(dateStartParsed.getHours()-3 == now.getHours()){
             if(dateStartParsed.getMinutes() > now.getMinutes()){
               let formattedStartHour;
               let formattedStartMinute;
@@ -276,7 +276,7 @@ export class RoomEventsPage implements OnInit {
       let dateEndParsed = new Date(element.end.dateTime);
       let meetingStart = moment(element.start.dateTime).subtract(3,'h').format();
       let meetingEnd = moment(element.end.dateTime).subtract(3,'h').format();
-      let nowFormatted = moment(now).add( 1,'h').format();
+      let nowFormatted = moment(now).format();
 
       if(!element.isCancelled && nowFormatted >= meetingStart && nowFormatted < meetingEnd){
         let formattedStartHour;
@@ -326,7 +326,6 @@ export class RoomEventsPage implements OnInit {
   }
 
   async useRoomClicked(){
-    console.log("clicou usar sala");
     let modal = await this.modalCtrl.create({
       component: RoomEventsModalPage,
       componentProps: {
@@ -339,8 +338,11 @@ export class RoomEventsPage implements OnInit {
 
     modal.onDidDismiss().then((res) => {
       let now = new Date();
-      this.clock = moment(now).add( 1,'h').format();
-      this.refreshTodayEventsArray();
+      this.clock = moment(now).format();
+      
+      if(res){
+        this.currentMeeting = res.data;
+      }
     });
     return await modal.present();
   }

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ModalController, AlertController } from '@ionic/angular';
+import { ModalController, AlertController, LoadingController } from '@ionic/angular';
 import { MSAdal, AuthenticationContext, AuthenticationResult } from '@ionic-native/ms-adal/ngx';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import * as moment from 'moment';
@@ -23,6 +23,7 @@ export class RoomEventsModalPage implements OnInit {
   constructor(
     public modalCtrl: ModalController,
     private msAdal: MSAdal,
+    private loadingCtrl: LoadingController,
     private alertCtrl: AlertController,
     private http: HttpClient
     ) {
@@ -48,11 +49,16 @@ export class RoomEventsModalPage implements OnInit {
     await alert.present();
   }
 
-  bookClicked(){
+  async bookClicked(){
     let now = new Date();
-    let nowFormatted = moment(now).add( 1,'h').format();
-    let temp = moment(now).add( 1,'h');
-    let endFormatted = temp.add(this.eventDuration,'m').format();
+    let nowFormatted = moment(now).format();
+    let endFormatted = moment(now).add(this.eventDuration,'m').format();
+
+    const loading = await this.loadingCtrl.create({
+      message: 'Criando evento'
+    });
+
+    loading.present();
 
     let authContext: AuthenticationContext = this.msAdal.createAuthenticationContext('https://login.windows.net/common');
 
@@ -96,14 +102,58 @@ export class RoomEventsModalPage implements OnInit {
       this.http.post(url, body, {
         headers: new HttpHeaders({"Authorization": "Bearer "+ this.token,"Content-Type":"application/json"})
       }).subscribe(res => {
+        loading.dismiss();
         console.log("response: ", res);
-        this.modalCtrl.dismiss();
+
+        let dateStartParsed = new Date(nowFormatted);
+        let dateEndParsed = new Date(endFormatted);
+
+        let formattedStartHour;
+        let formattedStartMinute;
+        let formattedEndHour;
+        let formattedEndMinute;
+        if(dateStartParsed.getHours() == 0){
+          formattedStartHour = "00";
+        }
+        else{
+          formattedStartHour = dateStartParsed.getHours();
+        }
+        if(dateEndParsed.getHours() == 0){
+          formattedEndHour = "00";
+        }
+        else{
+          formattedEndHour = dateEndParsed.getHours();
+        }
+        if(dateStartParsed.getMinutes() == 0){
+          formattedStartMinute = "00";
+        }
+        else{
+          formattedStartMinute = dateStartParsed.getMinutes();
+        }
+        if(dateEndParsed.getMinutes() == 0){
+          formattedEndMinute = "00";
+        }
+        else{
+          formattedEndMinute = dateEndParsed.getMinutes()
+        }
+
+        let event = {
+          subject: this.eventName,
+          formattedStartHour: formattedStartHour,
+          formattedStartMinutes: formattedStartMinute,
+          formattedEndHour: formattedEndHour,
+          formattedEndMinutes: formattedEndMinute
+        }
+
+        this.modalCtrl.dismiss(event);
       }, err =>{
+        loading.dismiss();
         console.log("erro", err);
         this.presentErrorAlert();
       })
       }
     ).catch((e: any) => {
+      loading.dismiss();
       this.presentErrorAlert();
       console.log('Authentication failed', e);
     });
