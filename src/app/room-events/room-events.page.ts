@@ -7,6 +7,7 @@ import * as moment from 'moment';
 import { RoomEventsModalPage } from '../room-events-modal/room-events-modal.page';
 import { RoomExtendModalPage } from '../room-extend-modal/room-extend-modal.page';
 import { Storage } from '@ionic/storage';
+import { NavigationBar } from '@ionic-native/navigation-bar/ngx';
 
 @Component({
   selector: 'app-room-events',
@@ -37,6 +38,7 @@ export class RoomEventsPage implements OnInit {
     private http: HttpClient,
     public modalCtrl: ModalController,
     private storage: Storage,
+    private navigationBar: NavigationBar,
     private loadingCtrl: LoadingController
   ) {
     this.route.queryParams.subscribe(params => {
@@ -415,6 +417,7 @@ export class RoomEventsPage implements OnInit {
     
 
     modal.onDidDismiss().then((res) => {
+      this.navigationBar.hideNavigationBar();
       let now = new Date();
       this.clock = moment(now).format();
       

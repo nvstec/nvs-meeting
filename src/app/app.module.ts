@@ -5,6 +5,7 @@ import { MsalModule } from '@azure/msal-angular';
 import { MSAdal, AuthenticationContext, AuthenticationResult } from '@ionic-native/ms-adal/ngx';
 import { HttpClientModule } from '@angular/common/http'
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
+import { NavigationBar } from '@ionic-native/navigation-bar/ngx';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -44,6 +45,7 @@ registerLocaleData(localePt);
     MSAdal,
     SplashScreen,
     ScreenOrientation,
+    NavigationBar,
     { provide: LOCALE_ID, useValue: "pt" },
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
