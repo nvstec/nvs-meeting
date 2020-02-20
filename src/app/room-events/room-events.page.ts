@@ -71,6 +71,16 @@ export class RoomEventsPage implements OnInit {
     await alert.present();
   }
 
+  async presentErrorEndMeetingAlert() {
+    const alert = await this.alertCtrl.create({
+      header: 'Erro!',
+      message: 'Ocorreu um erro ao encerrar o evento.',
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
+
   createTodayEventsArray(array:any){
     let now = new Date();
     array.forEach(element => {
@@ -425,5 +435,63 @@ export class RoomEventsPage implements OnInit {
 
     return await modal.present();
   }
-  
+ 
+  async finishMeetingClicked(){
+
+    const loading = await this.loadingCtrl.create({
+      message: 'Cancelando reunião'
+    });
+
+    const alert = await this.alertCtrl.create({
+      header: 'Confirmar encerramento',
+      message: 'Deseja realmente encerrar a reunião?',
+      buttons: [
+        {
+          text: 'NÃO',
+          role: 'cancel',
+        }, {
+          text: 'SIM',
+          handler: () => {
+            loading.present();
+
+            let authContext: AuthenticationContext = this.msAdal.createAuthenticationContext('https://login.windows.net/common');
+
+            authContext.acquireTokenSilentAsync('https://graph.microsoft.com', '03d4b82a-06df-4c21-99bd-ee5fec338c1f','').then((authResponse: AuthenticationResult) => {
+              console.log("responseSilentToken",authResponse);
+
+              let url = "https://graph.microsoft.com/v1.0/users/marine@nvstec.com/calendars/"+this.idCalendar+"/events/"+this.currentMeeting.eventId;
+
+              let now = new Date();
+              let meetingEnd = moment(now).format();
+
+              let body = {
+                end: {
+                  dateTime: meetingEnd,
+                  timeZone: "America/Sao_Paulo"
+                }
+              }
+
+              this.http.patch(url, body, {
+                headers: new HttpHeaders({"Authorization": "Bearer "+ this.token,"Content-Type":"application/json"})
+              }).subscribe(res => {
+                loading.dismiss();
+
+                this.currentMeeting = null;
+              }, err =>{
+                loading.dismiss();
+                console.log("erro", err);
+                this.presentErrorEndMeetingAlert();
+              })
+              }
+            ).catch((e: any) => {
+              loading.dismiss();
+              this.presentErrorEndMeetingAlert();
+              console.log('Authentication failed', e);
+            });
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
 }
