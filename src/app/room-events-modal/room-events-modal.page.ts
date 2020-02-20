@@ -154,6 +154,7 @@ export class RoomEventsModalPage implements OnInit {
           formattedStartMinutes: formattedStartMinute,
           formattedEndHour: formattedEndHour,
           formattedEndMinutes: formattedEndMinute,
+          eventEnd: dateEndParsed,
           eventId: res["id"],
           idCalendar: this.idCalendar
         }

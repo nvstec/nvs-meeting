@@ -1,16 +1,11 @@
-<ion-header translucent>
-  <ion-toolbar>
-    <ion-title>
-      NVS Meeting
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content fullscreen>
   <div id="container">
     <div *ngIf="!user">
-      <strong>Faça o login abaixo</strong><br>
-      <ion-button color="primary" (click)="signIn()">Login</ion-button>
+      <img class="logo-home" src="../../assets/nvstec-padrao.png">
+      <br>
+      <strong>Bem-vindo ao NVS Meeting</strong><br>
+      <br>
+      <ion-button class="btn-entrar-home" (click)="signIn()">Entrar</ion-button>
     </div>
     <br><br>
   </div>

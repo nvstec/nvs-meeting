@@ -6,6 +6,17 @@
   right: 0;
   top: 50%;
   transform: translateY(-50%);
+
+  .logo-home{
+    width: 83%;
+    height: 70%;
+    display: block;
+    padding-left: 13%;
+  }
+
+  .btn-entrar-home{
+    --background: #124572;
+  }
 }
 
 #container strong {
