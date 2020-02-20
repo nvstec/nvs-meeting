@@ -356,16 +356,57 @@ export class RoomEventsPage implements OnInit {
   }
 
   async useRoomClicked(){
-    let modal = await this.modalCtrl.create({
-      component: RoomEventsModalPage,
-      componentProps: {
-        token: this.token,
-        roomName: this.roomName,
-        roomEmail: this.roomEmail,
-        idCalendar: this.idCalendar
-      },
-      cssClass: 'custom-room-events-modal'
-    });
+
+    let cssClass = 'custom-case-4-room-events-modal';
+    let modal:any;
+
+    if(this.todayEventsArray.length > 0){
+      let now = new Date();
+      let temp = moment(now);
+      let nextEventStartTime = moment(this.todayEventsArray[0].startHour).subtract(3,'h');
+      let nextEventStartTimeFormatted = nextEventStartTime.format();
+      let difference = temp.diff(nextEventStartTime, 'minutes') * -1;
+
+      if(difference <= 15){
+        cssClass = 'custom-case-1-room-events-modal';
+      }
+      else if(difference <= 30){
+        cssClass = 'custom-case-2-room-events-modal';
+      }
+      else if(difference <= 45){
+        cssClass = 'custom-case-3-room-events-modal';
+      }
+      else if(difference <= 60){
+        cssClass = 'custom-room-events-modal';
+      }
+
+      modal = await this.modalCtrl.create({
+        component: RoomEventsModalPage,
+        componentProps: {
+          token: this.token,
+          roomName: this.roomName,
+          roomEmail: this.roomEmail,
+          idCalendar: this.idCalendar,
+          nextEventStart: nextEventStartTimeFormatted,
+          difference: difference
+        },
+        cssClass: cssClass
+      });
+    }
+    else{
+      modal = await this.modalCtrl.create({
+        component: RoomEventsModalPage,
+        componentProps: {
+          token: this.token,
+          roomName: this.roomName,
+          roomEmail: this.roomEmail,
+          idCalendar: this.idCalendar,
+          nextEventStart: null
+        },
+        cssClass: 'custom-room-events-modal'
+      });
+    }
+    
 
     modal.onDidDismiss().then((res) => {
       let now = new Date();
@@ -457,7 +498,7 @@ export class RoomEventsPage implements OnInit {
   async finishMeetingClicked(){
 
     const loading = await this.loadingCtrl.create({
-      message: 'Cancelando reunião'
+      message: 'Encerrando reunião'
     });
 
     const alert = await this.alertCtrl.create({

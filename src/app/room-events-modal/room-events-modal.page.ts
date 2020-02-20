@@ -15,7 +15,9 @@ export class RoomEventsModalPage implements OnInit {
   @Input() roomName:any;
   @Input() roomEmail:any;
   @Input() idCalendar:any;
-
+  @Input() nextEventStart: any;
+  @Input() difference: any;
+  
   eventName: any;
   eventDuration: any;
 
