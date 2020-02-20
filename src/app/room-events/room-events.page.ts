@@ -26,6 +26,8 @@ export class RoomEventsPage implements OnInit {
   todayEventsArray = [];
   currentMeeting: any = null;
 
+  disabledExtendBtn: boolean = false;
+
   constructor(
     private msAdal: MSAdal,
     private route: ActivatedRoute,
@@ -337,6 +339,14 @@ export class RoomEventsPage implements OnInit {
         this.currentMeeting = obj;
         foundMeeting = true;
         console.log("found meeting right now");
+        if(this.todayEventsArray.length > 0){
+          let temp = moment(this.currentMeeting.eventEnd);
+          let nextEventStartTime = moment(this.todayEventsArray[0].startHour).subtract(3,'h');
+          let difference = temp.diff(nextEventStartTime, 'minutes') * -1;
+          if(difference <= 1){
+            this.disabledExtendBtn = true;
+          }
+        }
       }
     });
     if(!foundMeeting){
@@ -430,6 +440,14 @@ export class RoomEventsPage implements OnInit {
       this.clock = moment(now).format();
       if(res.data){
         this.currentMeeting = res.data;
+        if(this.todayEventsArray.length > 0){
+          let temp = moment(this.currentMeeting.eventEnd);
+          let nextEventStartTime = moment(this.todayEventsArray[0].startHour).subtract(3,'h');
+          let difference = temp.diff(nextEventStartTime, 'minutes') * -1;
+          if(difference <= 1){
+            this.disabledExtendBtn = true;
+          }
+        }
       }
     });
 
