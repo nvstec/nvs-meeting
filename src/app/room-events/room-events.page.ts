@@ -369,16 +369,16 @@ export class RoomEventsPage implements OnInit {
       let nextEventStartTimeFormatted = nextEventStartTime.format();
       let difference = temp.diff(nextEventStartTime, 'minutes') * -1;
 
-      if(difference < 15){
+      if(difference <= 15){
         cssClass = 'custom-extend-events-case-1-next-event-modal';
       }
-      else if(difference < 30){
+      else if(difference <= 30){
         cssClass = 'custom-extend-events-case-2-next-event-modal';
       }
-      else if(difference < 45){
+      else if(difference <= 45){
         cssClass = 'custom-extend-events-case-3-next-event-modal';
       }
-      else if(difference < 60){
+      else if(difference <= 60){
         cssClass = 'custom-extend-events-modal';
       }
 

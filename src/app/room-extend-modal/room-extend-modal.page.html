@@ -13,13 +13,13 @@
         </ion-list-header>
     
         <div *ngIf="difference">
-          <div *ngIf="difference < 15">
+          <div *ngIf="difference < 15 || difference == 15">
             <ion-item lines="none">
               <ion-label>Até a próxima reunião</ion-label>
-              <ion-radio slot="start" value="90"></ion-radio>
+              <ion-radio slot="start" value="9999"></ion-radio>
             </ion-item>
           </div>
-          <div *ngIf="(difference > 15 || difference == 15) && difference < 30">
+          <div *ngIf="difference > 15 && (difference < 30 || difference == 30)">
             <ion-item lines="none">
               <ion-label>15 minutos</ion-label>
               <ion-radio slot="start" value="15"></ion-radio>
@@ -27,10 +27,10 @@
 
             <ion-item lines="none">
               <ion-label>Até a próxima reunião</ion-label>
-              <ion-radio slot="start" value="90"></ion-radio>
+              <ion-radio slot="start" value="9999"></ion-radio>
             </ion-item>
           </div>
-          <div *ngIf="(difference > 30 || difference == 30) && difference < 45">
+          <div *ngIf="difference > 30 && (difference < 45 || difference == 45)">
             <ion-item lines="none">
               <ion-label>15 minutos</ion-label>
               <ion-radio slot="start" value="15"></ion-radio>
@@ -48,10 +48,10 @@
 
             <ion-item lines="none">
               <ion-label>Até a próxima reunião</ion-label>
-              <ion-radio slot="start" value="90"></ion-radio>
+              <ion-radio slot="start" value="9999"></ion-radio>
             </ion-item>
           </div>
-          <div *ngIf="(difference > 45 || difference == 45) && difference < 60">
+          <div *ngIf="difference > 45 && (difference < 60 || difference == 60)">
             <ion-item lines="none">
               <ion-label>15 minutos</ion-label>
               <ion-radio slot="start" value="15"></ion-radio>
@@ -69,10 +69,10 @@
             
             <ion-item lines="none">
               <ion-label>Até a próxima reunião</ion-label>
-              <ion-radio slot="start" value="90"></ion-radio>
+              <ion-radio slot="start" value="9999"></ion-radio>
             </ion-item>
           </div>
-          <div *ngIf="(difference > 60 || difference == 60)">
+          <div *ngIf="difference > 60">
             <ion-item lines="none">
               <ion-label>15 minutos</ion-label>
               <ion-radio slot="start" value="15"></ion-radio>
@@ -92,10 +92,10 @@
               <ion-label>1 hora</ion-label>
               <ion-radio slot="start" value="60"></ion-radio>
             </ion-item>
-            
+
             <ion-item lines="none">
               <ion-label>Até a próxima reunião</ion-label>
-              <ion-radio slot="start" value="90"></ion-radio>
+              <ion-radio slot="start" value="9999"></ion-radio>
             </ion-item>
           </div>
         </div>
