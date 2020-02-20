@@ -17,7 +17,7 @@ export class RoomEventsModalPage implements OnInit {
   @Input() idCalendar:any;
   @Input() nextEventStart: any;
   @Input() difference: any;
-  
+
   eventName: any;
   eventDuration: any;
 
@@ -55,6 +55,11 @@ export class RoomEventsModalPage implements OnInit {
   async bookClicked(){
     let now = new Date();
     let nowFormatted = moment(now).format();
+
+    if(this.eventDuration == 9999){
+      this.eventDuration = this.difference;
+    }
+
     let endFormatted = moment(now).add(this.eventDuration,'m').format();
 
     const loading = await this.loadingCtrl.create({
