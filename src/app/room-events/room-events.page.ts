@@ -360,10 +360,28 @@ export class RoomEventsPage implements OnInit {
 
   async extendRoomClicked(){
 
+    let cssClass = 'custom-extend-events-next-event-modal';
     let modal:any;
 
     if(this.todayEventsArray.length > 0){
-      let nextEventStartTime = moment(this.todayEventsArray[0].startHour).subtract(3,'h').format();
+      let temp = moment(this.currentMeeting.eventEnd);
+      let nextEventStartTime = moment(this.todayEventsArray[0].startHour).subtract(3,'h');
+      let nextEventStartTimeFormatted = nextEventStartTime.format();
+      let difference = temp.diff(nextEventStartTime, 'minutes') * -1;
+
+      if(difference < 15){
+        cssClass = 'custom-extend-events-case-1-next-event-modal';
+      }
+      else if(difference < 30){
+        cssClass = 'custom-extend-events-case-2-next-event-modal';
+      }
+      else if(difference < 45){
+        cssClass = 'custom-extend-events-case-3-next-event-modal';
+      }
+      else if(difference < 60){
+        cssClass = 'custom-extend-events-modal';
+      }
+
       modal = await this.modalCtrl.create({
         component: RoomExtendModalPage,
         componentProps: {
@@ -374,9 +392,10 @@ export class RoomEventsPage implements OnInit {
           eventId: this.currentMeeting.eventId,
           eventEnd: this.currentMeeting.eventEnd,
           idCalendar: this.idCalendar,
-          nextEventStart: nextEventStartTime
+          nextEventStart: nextEventStartTimeFormatted,
+          difference: difference
         },
-        cssClass: 'custom-extend-events-next-event-modal'
+        cssClass: cssClass
       });
     }
     else{

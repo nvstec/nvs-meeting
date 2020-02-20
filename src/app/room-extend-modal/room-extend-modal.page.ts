@@ -19,6 +19,7 @@ export class RoomExtendModalPage implements OnInit {
   @Input() eventEnd: any;
   @Input() idCalendar: any;
   @Input() nextEventStart: any;
+  @Input() difference: any;
 
   extendDuration: any;
   isExtendBtnDisabled: boolean = true;
