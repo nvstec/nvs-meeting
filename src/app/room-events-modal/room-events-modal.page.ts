@@ -3,6 +3,7 @@ import { ModalController, AlertController, LoadingController } from '@ionic/angu
 import { MSAdal, AuthenticationContext, AuthenticationResult } from '@ionic-native/ms-adal/ngx';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import * as moment from 'moment';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-room-events-modal',
@@ -28,6 +29,7 @@ export class RoomEventsModalPage implements OnInit {
     private msAdal: MSAdal,
     private loadingCtrl: LoadingController,
     private alertCtrl: AlertController,
+    private storage: Storage,
     private http: HttpClient
     ) {
 
@@ -72,6 +74,7 @@ export class RoomEventsModalPage implements OnInit {
 
     authContext.acquireTokenSilentAsync('https://graph.microsoft.com', '03d4b82a-06df-4c21-99bd-ee5fec338c1f','').then((authResponse: AuthenticationResult) => {
       console.log("responseSilentToken",authResponse);
+      this.storage.set('token',authResponse.accessToken);
       this.token = authResponse.accessToken;
       let url = "https://graph.microsoft.com/v1.0/me/events";
 

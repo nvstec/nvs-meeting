@@ -12,6 +12,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { IonicStorageModule } from '@ionic/storage';
 
 import { RoomEventsModalPageModule } from './room-events-modal/room-events-modal.module';
 import { RoomExtendModalPageModule } from './room-extend-modal/room-extend-modal.module';
@@ -29,6 +30,7 @@ registerLocaleData(localePt);
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
+    IonicStorageModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
     RoomEventsModalPageModule,

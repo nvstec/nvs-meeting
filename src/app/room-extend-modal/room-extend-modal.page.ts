@@ -3,6 +3,7 @@ import * as moment from 'moment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LoadingController, ModalController, AlertController } from '@ionic/angular';
 import { MSAdal, AuthenticationContext, AuthenticationResult } from '@ionic-native/ms-adal/ngx';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-room-extend-modal',
@@ -29,6 +30,7 @@ export class RoomExtendModalPage implements OnInit {
     private msAdal: MSAdal,
     private loadingCtrl: LoadingController,
     public modalCtrl: ModalController,
+    private storage: Storage,
     private alertCtrl: AlertController
   ) { }
 
@@ -63,6 +65,7 @@ export class RoomExtendModalPage implements OnInit {
 
     authContext.acquireTokenSilentAsync('https://graph.microsoft.com', '03d4b82a-06df-4c21-99bd-ee5fec338c1f','').then((authResponse: AuthenticationResult) => {
       console.log("responseSilentToken",authResponse);
+      this.storage.set('token',authResponse.accessToken);
 
       let url = "https://graph.microsoft.com/v1.0/users/marine@nvstec.com/calendars/"+this.idCalendar+"/events/"+this.eventId;
 

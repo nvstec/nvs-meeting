@@ -6,6 +6,7 @@ import { LoadingController, AlertController, ModalController } from '@ionic/angu
 import * as moment from 'moment';
 import { RoomEventsModalPage } from '../room-events-modal/room-events-modal.page';
 import { RoomExtendModalPage } from '../room-extend-modal/room-extend-modal.page';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-room-events',
@@ -35,6 +36,7 @@ export class RoomEventsPage implements OnInit {
     private router: Router,
     private http: HttpClient,
     public modalCtrl: ModalController,
+    private storage: Storage,
     private loadingCtrl: LoadingController
   ) {
     this.route.queryParams.subscribe(params => {
@@ -181,6 +183,7 @@ export class RoomEventsPage implements OnInit {
     let authContext: AuthenticationContext = this.msAdal.createAuthenticationContext('https://login.windows.net/common');
 
     authContext.acquireTokenSilentAsync('https://graph.microsoft.com', '03d4b82a-06df-4c21-99bd-ee5fec338c1f','').then((authResponse: AuthenticationResult) =>{
+      this.storage.set('token',authResponse.accessToken);
       console.log("responseSilentToken",authResponse);
       this.token = authResponse.accessToken;
       let url = "https://graph.microsoft.com/v1.0/users/"+this.roomEmail+"/events";
@@ -526,7 +529,8 @@ export class RoomEventsPage implements OnInit {
 
             authContext.acquireTokenSilentAsync('https://graph.microsoft.com', '03d4b82a-06df-4c21-99bd-ee5fec338c1f','').then((authResponse: AuthenticationResult) => {
               console.log("responseSilentToken",authResponse);
-
+              this.storage.set('token',authResponse.accessToken);
+              
               let url = "https://graph.microsoft.com/v1.0/users/marine@nvstec.com/calendars/"+this.idCalendar+"/events/"+this.currentMeeting.eventId;
 
               let now = new Date();
