@@ -349,6 +349,9 @@ export class RoomEventsPage implements OnInit {
           if(difference <= 1){
             this.disabledExtendBtn = true;
           }
+          else{
+            this.disabledExtendBtn = false;
+          }
         }
       }
     });
@@ -425,6 +428,9 @@ export class RoomEventsPage implements OnInit {
           if(difference <= 1){
             this.disabledExtendBtn = true;
           }
+          else{
+            this.disabledExtendBtn = false;
+          }
         }
       }
     });
@@ -499,6 +505,9 @@ export class RoomEventsPage implements OnInit {
           let difference = temp.diff(nextEventStartTime, 'minutes') * -1;
           if(difference <= 1){
             this.disabledExtendBtn = true;
+          }
+          else{
+            this.disabledExtendBtn = false;
           }
         }
       }
