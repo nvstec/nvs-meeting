@@ -362,7 +362,7 @@ export class RoomEventsPage implements OnInit {
         console.log("found meeting right now");
         if(this.todayEventsArray.length > 0){
           let temp = moment(this.currentMeeting.eventEnd);
-          let nextEventStartTime = moment(this.todayEventsArray[0].startHour).subtract(3,'h');
+          let nextEventStartTime = moment(this.todayEventsArray[0].startHour);
           let difference = temp.diff(nextEventStartTime, 'minutes') * -1;
           if(difference <= 1){
             this.disabledExtendBtn = true;
@@ -387,7 +387,7 @@ export class RoomEventsPage implements OnInit {
     if(this.todayEventsArray.length > 0){
       let now = new Date();
       let temp = moment(now);
-      let nextEventStartTime = moment(this.todayEventsArray[0].startHour).subtract(3,'h');
+      let nextEventStartTime = moment(this.todayEventsArray[0].startHour);
       let nextEventStartTimeFormatted = nextEventStartTime.format();
       let difference = temp.diff(nextEventStartTime, 'minutes') * -1;
 
@@ -442,7 +442,7 @@ export class RoomEventsPage implements OnInit {
 
         if(this.todayEventsArray.length > 0){
           let temp = moment(this.currentMeeting.eventEnd);
-          let nextEventStartTime = moment(this.todayEventsArray[0].startHour).subtract(3,'h');
+          let nextEventStartTime = moment(this.todayEventsArray[0].startHour);
           let difference = temp.diff(nextEventStartTime, 'minutes') * -1;
           if(difference <= 1){
             this.disabledExtendBtn = true;
@@ -463,7 +463,7 @@ export class RoomEventsPage implements OnInit {
 
     if(this.todayEventsArray.length > 0){
       let temp = moment(this.currentMeeting.eventEnd);
-      let nextEventStartTime = moment(this.todayEventsArray[0].startHour).subtract(3,'h');
+      let nextEventStartTime = moment(this.todayEventsArray[0].startHour);
       let nextEventStartTimeFormatted = nextEventStartTime.format();
       let difference = temp.diff(nextEventStartTime, 'minutes') * -1;
 
@@ -520,7 +520,7 @@ export class RoomEventsPage implements OnInit {
         this.currentMeeting = res.data;
         if(this.todayEventsArray.length > 0){
           let temp = moment(this.currentMeeting.eventEnd);
-          let nextEventStartTime = moment(this.todayEventsArray[0].startHour).subtract(3,'h');
+          let nextEventStartTime = moment(this.todayEventsArray[0].startHour);
           let difference = temp.diff(nextEventStartTime, 'minutes') * -1;
           if(difference <= 1){
             this.disabledExtendBtn = true;

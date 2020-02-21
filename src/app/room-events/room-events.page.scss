@@ -18,8 +18,8 @@
 
             .txt-room-status-room-events{
                 display: block;
-                padding-top: 35%;
-                font-size: 2em;
+                padding-top: 27%;
+                font-size: 6em;
                 color: white;
                 text-align: center;
             }
@@ -27,10 +27,13 @@
             .btn-usar-room-event{
                 display: block;
                 position: absolute;
-                left: 43%;
+                left: 35%;
                 bottom: 3%;
                 --background: white;
                 color: #124572;
+                height: 15vh;
+                width: 34vh;
+                font-size: 2em;
             }
         }
         
@@ -49,15 +52,15 @@
 
             .txt-room-status-room-events{
                 display: block;
-                padding-top: 35%;
-                font-size: 2em;
+                padding-top: 13%;
+                font-size: 6em;
                 color: white;
                 text-align: center;
             }
 
             .txt-room-description-room-event{
                 display: block;
-                font-size: 1.5em;
+                font-size: 2.4em;
                 color: white;
                 text-align: center;
             }
@@ -69,6 +72,9 @@
                 bottom: 3%;
                 --background: white;
                 color: red;
+                width: 30vh;
+                height: 10vh;
+                font-size: 1.4em;
             }
 
             .btn-extender-room-event{
@@ -78,6 +84,9 @@
                 bottom: 3%;
                 --background: white;
                 color: red;
+                width: 30vh;
+                height: 10vh;
+                font-size: 1.4em;
             }
         }
 
@@ -97,6 +106,13 @@
         .txt-next-events-room-events{
             display: block;
             padding-left: 5%;
+        }
+
+        .txt-next-events-description-room-events{
+            display: block;
+            padding-left: 5%;
+            font-weight: bold;
+            font-size: 1.4em;
         }
     }
 }
