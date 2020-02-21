@@ -69,11 +69,17 @@ export class RoomExtendModalPage implements OnInit {
 
       let url = "https://graph.microsoft.com/v1.0/users/marine@nvstec.com/calendars/"+this.idCalendar+"/events/"+this.eventId;
 
+      let meetingEnd = '';
+      let meetingEndFinal = '';
       if(this.extendDuration == 9999){
         this.extendDuration = this.difference;
+        meetingEnd = moment(this.eventEnd).add(this.extendDuration,'m').format();
+        meetingEndFinal = moment(meetingEnd).subtract(30,'s').format();
       }
-      let meetingEnd = moment(this.eventEnd).add(this.extendDuration,'m').format();
-      let meetingEndFinal = moment(meetingEnd).subtract(30,'s').format();
+      else{
+        meetingEndFinal = moment(this.eventEnd).add(this.extendDuration,'m').format();
+      }
+      
       let body = {
         end: {
           dateTime: meetingEndFinal,

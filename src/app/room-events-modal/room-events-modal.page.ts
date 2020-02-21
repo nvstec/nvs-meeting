@@ -57,12 +57,16 @@ export class RoomEventsModalPage implements OnInit {
   async bookClicked(){
     let now = new Date();
     let nowFormatted = moment(now).format();
+    let endFormattedFinal = '';
 
     if(this.eventDuration == 9999){
       this.eventDuration = this.difference;
+      let endFormatted = moment(now).add(this.eventDuration,'m').format();
+      endFormattedFinal = moment(endFormatted).subtract(30,'s').format();
     }
-
-    let endFormatted = moment(now).add(this.eventDuration,'m').format();
+    else{
+      endFormattedFinal = moment(now).add(this.eventDuration,'m').format();
+    }
 
     const loading = await this.loadingCtrl.create({
       message: 'Criando evento'
@@ -85,7 +89,7 @@ export class RoomEventsModalPage implements OnInit {
           timeZone: "America/Sao_Paulo"
         },
         end: {
-          dateTime: endFormatted,
+          dateTime: endFormattedFinal,
           timeZone: "America/Sao_Paulo"
         },
         location: {
@@ -117,32 +121,32 @@ export class RoomEventsModalPage implements OnInit {
         console.log("response: ", res);
 
         let dateStartParsed = new Date(nowFormatted);
-        let dateEndParsed = new Date(endFormatted);
+        let dateEndParsed = new Date(endFormattedFinal);
 
         let formattedStartHour;
         let formattedStartMinute;
         let formattedEndHour;
         let formattedEndMinute;
-        if(dateStartParsed.getHours() == 0){
-          formattedStartHour = "00";
+        if(dateStartParsed.getHours() >= 0 && dateStartParsed.getHours() <= 9){
+          formattedStartHour = "0"+dateStartParsed.getHours();
         }
         else{
           formattedStartHour = dateStartParsed.getHours();
         }
-        if(dateEndParsed.getHours() == 0){
-          formattedEndHour = "00";
+        if(dateEndParsed.getHours() >= 0 && dateEndParsed.getHours() <= 9){
+          formattedEndHour = "0"+dateEndParsed.getHours();
         }
         else{
           formattedEndHour = dateEndParsed.getHours();
         }
-        if(dateStartParsed.getMinutes() == 0){
-          formattedStartMinute = "00";
+        if(dateStartParsed.getMinutes() >= 0 && dateStartParsed.getMinutes() <= 9){
+          formattedStartMinute = "0"+dateStartParsed.getMinutes();
         }
         else{
           formattedStartMinute = dateStartParsed.getMinutes();
         }
-        if(dateEndParsed.getMinutes() == 0){
-          formattedEndMinute = "00";
+        if(dateEndParsed.getMinutes() >= 0 && dateEndParsed.getMinutes() <= 9){
+          formattedEndMinute = "0"+dateEndParsed.getMinutes();
         }
         else{
           formattedEndMinute = dateEndParsed.getMinutes()
