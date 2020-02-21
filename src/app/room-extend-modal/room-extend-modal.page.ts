@@ -73,10 +73,10 @@ export class RoomExtendModalPage implements OnInit {
         this.extendDuration = this.difference;
       }
       let meetingEnd = moment(this.eventEnd).add(this.extendDuration,'m').format();
-
+      let meetingEndFinal = moment(meetingEnd).subtract(30,'s').format();
       let body = {
         end: {
-          dateTime: meetingEnd,
+          dateTime: meetingEndFinal,
           timeZone: "America/Sao_Paulo"
         }
       }
@@ -88,32 +88,36 @@ export class RoomExtendModalPage implements OnInit {
 
         let dateStartParsed = new Date(res["start"].dateTime);
         let dateEndParsed = new Date(res["end"].dateTime);
+        let temp = moment(dateStartParsed).subtract(3,'h').format();
+        let temp2 = moment(dateEndParsed).subtract(3,'h').format();
+        dateStartParsed = new Date(temp);
+        dateEndParsed = new Date(temp2);
 
         let formattedStartHour;
         let formattedStartMinute;
         let formattedEndHour;
         let formattedEndMinute;
 
-        if(dateStartParsed.getHours()-3 == 0){
-          formattedStartHour = "00";
+        if(dateStartParsed.getHours() >= 0 && dateStartParsed.getHours() <= 9){
+          formattedStartHour = "0"+dateStartParsed.getHours();
         }
         else{
-          formattedStartHour = dateStartParsed.getHours()-3;
+          formattedStartHour = dateStartParsed.getHours();
         }
-        if(dateEndParsed.getHours()-3 == 0){
-          formattedEndHour = "00";
+        if(dateEndParsed.getHours() >= 0 && dateEndParsed.getHours() <= 9){
+          formattedEndHour = "0"+dateEndParsed.getHours();
         }
         else{
-          formattedEndHour = dateEndParsed.getHours()-3;
+          formattedEndHour = dateEndParsed.getHours();
         }
-        if(dateStartParsed.getMinutes() == 0){
-          formattedStartMinute = "00";
+        if(dateStartParsed.getMinutes() >= 0 && dateStartParsed.getMinutes() <= 9){
+          formattedStartMinute = "0"+dateStartParsed.getMinutes();
         }
         else{
           formattedStartMinute = dateStartParsed.getMinutes();
         }
-        if(dateEndParsed.getMinutes() == 0){
-          formattedEndMinute = "00";
+        if(dateEndParsed.getMinutes() >= 0 && dateEndParsed.getMinutes() <= 9){
+          formattedEndMinute = "0"+dateEndParsed.getMinutes();
         }
         else{
           formattedEndMinute = dateEndParsed.getMinutes()
@@ -125,6 +129,7 @@ export class RoomExtendModalPage implements OnInit {
           formattedStartMinutes: formattedStartMinute,
           formattedEndHour: formattedEndHour,
           formattedEndMinutes: formattedEndMinute,
+          eventEnd: meetingEndFinal,
           eventId: res["id"],
           idCalendar: this.idCalendar
         }
