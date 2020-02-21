@@ -64,7 +64,7 @@
 
             .txt-room-event-time-room-event{
                 display: block;
-                margin-top: 11%;
+                margin-top: 14%;
                 margin-left: 3%;
                 font-size: 1.3em;
                 color: white;
@@ -117,38 +117,36 @@
 
         .logo-room-events{
             width: 35vw;
-            height: 15vh;
+            height: 14vh;
             display: block;
             padding: 5%;
         }
         
         .txt-room-name-room-events{
             display: block;
-            padding-left: 5%;
-            font-size: 1.8em;
+            font-size: 1.7em;
+            text-align: center;;
         }
 
         .txt-today-events-room-events{
             display: block;
-            padding-left: 5%;
         }
 
         .scrollable-area-room-events{
             display: block;
-            margin-top: 14%;
+            margin-top: 9%;
             overflow-y: auto;
-            height: 50vh;
+            height: 47vh;
 
             .txt-next-events-room-events{
                 display: block;
-                padding-left: 5%;
+                padding-left: 2%;
             }
     
             .txt-next-events-description-room-events{
                 display: block;
-                padding-left: 5%;
+                padding-left: 2%;
                 font-weight: bold;
-                font-size: 1.4em;
             }
         }
     }
