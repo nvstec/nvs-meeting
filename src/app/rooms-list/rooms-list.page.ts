@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-rooms-list',
@@ -17,6 +17,7 @@ export class RoomsListPage implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private http: HttpClient,
+    private alertCtrl: AlertController,
     private loadingCtrl: LoadingController
   ) {
     this.route.queryParams.subscribe(params => {
@@ -28,6 +29,16 @@ export class RoomsListPage implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  async presentErrorAlert() {
+    const alert = await this.alertCtrl.create({
+      header: 'Erro!',
+      message: 'Ocorreu um erro ao carregar os eventos, tente novamente. Caso o erro persista, contate o administrador local.',
+      buttons: ['OK']
+    });
+
+    await alert.present();
   }
 
   async onSelectRoom(room){
@@ -63,10 +74,12 @@ export class RoomsListPage implements OnInit {
       }, err =>{
         console.log("erro", err);
         loading.dismiss();
+        this.presentErrorAlert();
       })
     }, err =>{
       console.log("erro", err);
       loading.dismiss();
+      this.presentErrorAlert();
     })
   }
 }

@@ -46,7 +46,7 @@ export class RoomExtendModalPage implements OnInit {
   async presentErrorAlert() {
     const alert = await this.alertCtrl.create({
       header: 'Erro!',
-      message: 'Ocorreu um erro ao extender a reunião, tente novamente. Se o problema insistir contate o Administrador.',
+      message: 'Ocorreu um erro ao extender a reunião, tente novamente. Se o problema insistir contate o administrador local.',
       buttons: ['OK']
     });
 
