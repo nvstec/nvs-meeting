@@ -236,7 +236,7 @@ export class RoomEventsPage implements OnInit {
                 formattedEndMinute = "0"+dateEndParsed.getMinutes();
               }
               else{
-                formattedEndMinute = dateEndParsed.getMinutes()
+                formattedEndMinute = dateEndParsed.getMinutes();
               }
               let temp = {
                 subject: element.subject,
@@ -272,7 +272,7 @@ export class RoomEventsPage implements OnInit {
             else{
               formattedStartMinute = dateStartParsed.getMinutes();
             }
-            if(dateEndParsed.getMinutes() == 0){
+            if(dateEndParsed.getMinutes() >= 0 && dateEndParsed.getMinutes() <= 9){
               formattedEndMinute = "0"+dateEndParsed.getMinutes();
             }
             else{

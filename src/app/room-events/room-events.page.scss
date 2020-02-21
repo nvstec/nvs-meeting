@@ -52,10 +52,11 @@
 
             .txt-room-status-room-events{
                 display: block;
-                padding-top: 13%;
+                padding-top: 5%;
                 font-size: 6em;
                 color: white;
                 text-align: center;
+                font-family: 'muliextralight';
             }
 
             .txt-room-description-room-event{
@@ -90,9 +91,13 @@
             }
         }
 
+        .right-container-room-events{
+            padding: 6%;
+        }
+
         .logo-room-events{
             width: 35vw;
-            height: 17vh;
+            height: 15vh;
             display: block;
             padding: 5%;
         }
@@ -110,9 +115,9 @@
 
         .scrollable-area-room-events{
             display: block;
-            margin-top: 5%;
+            margin-top: 14%;
             overflow-y: auto;
-            height: 61vh;
+            height: 50vh;
 
             .txt-next-events-room-events{
                 display: block;

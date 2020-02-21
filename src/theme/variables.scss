@@ -1,7 +1,9 @@
-// Ionic Variables and Theming. For more info, please see:
-// http://ionicframework.com/docs/theming/
+@import "../assets/fonts/muli-font.css";
 
-/** Ionic CSS Variables **/
+* {
+  font-family: 'muliregular';
+}
+
 :root {
   /** primary **/
   --ion-color-primary: #3880ff;
