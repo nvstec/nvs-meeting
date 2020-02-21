@@ -19,7 +19,7 @@ export class RoomEventsModalPage implements OnInit {
   @Input() nextEventStart: any;
   @Input() difference: any;
 
-  eventName: any;
+  eventName: any = "Reunião ";
   eventDuration: any;
 
   isBookBtnDisabled: boolean = true;

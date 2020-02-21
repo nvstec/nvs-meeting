@@ -5,7 +5,7 @@
         height: 100vh;
 
         .left-container-free-room-events{
-            background-color: #124572;
+            background-color: #063A69;
             height: 100vh;
         
             .txt-clock-room-events{
@@ -29,13 +29,17 @@
             .btn-usar-room-event{
                 display: block;
                 position: absolute;
-                left: 35%;
-                bottom: 3%;
-                --background: white;
-                color: #124572;
-                height: 15vh;
-                width: 34vh;
-                font-size: 2em;
+                left: 3%;
+                bottom: 4%;
+                --background: #063A69;
+                color: white;
+                width: 33vh;
+                height: 7vh;
+                font-size: 1.3em;
+                border: 2px solid white;
+                border-radius: 5px;
+                font-family: 'muliextralight';
+                padding-top: 1%;
             }
         }
         
