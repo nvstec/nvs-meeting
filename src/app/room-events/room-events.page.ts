@@ -92,24 +92,28 @@ export class RoomEventsPage implements OnInit {
     array.forEach(element => {
       let dateStartParsed = new Date(element.start.dateTime);
       let dateEndParsed = new Date(element.end.dateTime);
-      if(!element.isCancelled && dateStartParsed.getDate() == now.getDate() && dateStartParsed.getMonth() == now.getMonth() && dateStartParsed.getFullYear() == now.getFullYear() && dateStartParsed.getHours()-3 >= now.getHours()){
-        if(dateStartParsed.getHours()-3 == now.getHours()){
+      let temp = moment(dateStartParsed).subtract(3,'h').format();
+      let temp2 = moment(dateEndParsed).subtract(3,'h').format();
+      dateStartParsed = new Date(temp);
+      dateEndParsed = new Date(temp2);
+      if(!element.isCancelled && dateStartParsed.getDate() == now.getDate() && dateStartParsed.getMonth() == now.getMonth() && dateStartParsed.getFullYear() == now.getFullYear() && dateStartParsed.getHours() >= now.getHours()){
+        if(dateStartParsed.getHours() == now.getHours()){
           if(dateStartParsed.getMinutes() > now.getMinutes()){
             let formattedStartHour;
             let formattedStartMinute;
             let formattedEndHour;
             let formattedEndMinute;
-            if(dateStartParsed.getHours()-3 == 0){
+            if(dateStartParsed.getHours() == 0){
               formattedStartHour = "00";
             }
             else{
-              formattedStartHour = dateStartParsed.getHours()-3;
+              formattedStartHour = dateStartParsed.getHours();
             }
-            if(dateEndParsed.getHours()-3 == 0){
+            if(dateEndParsed.getHours() == 0){
               formattedEndHour = "00";
             }
             else{
-              formattedEndHour = dateEndParsed.getHours()-3;
+              formattedEndHour = dateEndParsed.getHours();
             }
             if(dateStartParsed.getMinutes() == 0){
               formattedStartMinute = "00";
@@ -139,17 +143,17 @@ export class RoomEventsPage implements OnInit {
           let formattedStartMinute;
           let formattedEndHour;
           let formattedEndMinute;
-          if(dateStartParsed.getHours()-3 == 0){
+          if(dateStartParsed.getHours() == 0){
             formattedStartHour = "00";
           }
           else{
-            formattedStartHour = dateStartParsed.getHours()-3;
+            formattedStartHour = dateStartParsed.getHours();
           }
-          if(dateEndParsed.getHours()-3 == 0){
+          if(dateEndParsed.getHours() == 0){
             formattedEndHour = "00";
           }
           else{
-            formattedEndHour = dateEndParsed.getHours()-3;
+            formattedEndHour = dateEndParsed.getHours();
           }
           if(dateStartParsed.getMinutes() == 0){
             formattedStartMinute = "00";
@@ -197,24 +201,28 @@ export class RoomEventsPage implements OnInit {
       res["value"].forEach(element => {
         let dateStartParsed = new Date(element.start.dateTime);
         let dateEndParsed = new Date(element.end.dateTime);
-        if(!element.isCancelled && dateStartParsed.getDate() == now.getDate() && dateStartParsed.getMonth() == now.getMonth() && dateStartParsed.getFullYear() == now.getFullYear() && dateStartParsed.getHours()-3 >= now.getHours()){
-          if(dateStartParsed.getHours()-3 == now.getHours()){
+        let temp = moment(dateStartParsed).subtract(3,'h').format();
+        let temp2 = moment(dateEndParsed).subtract(3,'h').format();
+        dateStartParsed = new Date(temp);
+        dateEndParsed = new Date(temp2);
+        if(!element.isCancelled && dateStartParsed.getDate() == now.getDate() && dateStartParsed.getMonth() == now.getMonth() && dateStartParsed.getFullYear() == now.getFullYear() && dateStartParsed.getHours() >= now.getHours()){
+          if(dateStartParsed.getHours() == now.getHours()){
             if(dateStartParsed.getMinutes() > now.getMinutes()){
               let formattedStartHour;
               let formattedStartMinute;
               let formattedEndHour;
               let formattedEndMinute;
-              if(dateStartParsed.getHours()-3 == 0){
+              if(dateStartParsed.getHours() == 0){
                 formattedStartHour = "00";
               }
               else{
-                formattedStartHour = dateStartParsed.getHours()-3;
+                formattedStartHour = dateStartParsed.getHours();
               }
-              if(dateEndParsed.getHours()-3 == 0){
+              if(dateEndParsed.getHours() == 0){
                 formattedEndHour = "00";
               }
               else{
-                formattedEndHour = dateEndParsed.getHours()-3;
+                formattedEndHour = dateEndParsed.getHours();
               }
               if(dateStartParsed.getMinutes() == 0){
                 formattedStartMinute = "00";
@@ -244,17 +252,17 @@ export class RoomEventsPage implements OnInit {
             let formattedStartMinute;
             let formattedEndHour;
             let formattedEndMinute;
-            if(dateStartParsed.getHours()-3 == 0){
+            if(dateStartParsed.getHours() == 0){
               formattedStartHour = "00";
             }
             else{
-              formattedStartHour = dateStartParsed.getHours()-3;
+              formattedStartHour = dateStartParsed.getHours();
             }
-            if(dateEndParsed.getHours()-3 == 0){
+            if(dateEndParsed.getHours() == 0){
               formattedEndHour = "00";
             }
             else{
-              formattedEndHour = dateEndParsed.getHours()-3;
+              formattedEndHour = dateEndParsed.getHours();
             }
             if(dateStartParsed.getMinutes() == 0){
               formattedStartMinute = "00";
@@ -299,6 +307,10 @@ export class RoomEventsPage implements OnInit {
     array.forEach(element => {
       let dateStartParsed = new Date(element.start.dateTime);
       let dateEndParsed = new Date(element.end.dateTime);
+      let temp = moment(dateStartParsed).subtract(3,'h').format();
+      let temp2 = moment(dateEndParsed).subtract(3,'h').format();
+      dateStartParsed = new Date(temp);
+      dateEndParsed = new Date(temp2);
       let meetingStart = moment(element.start.dateTime).subtract(3,'h').format();
       let meetingEnd = moment(element.end.dateTime).subtract(3,'h').format();
       let nowFormatted = moment(now).format();
@@ -308,17 +320,17 @@ export class RoomEventsPage implements OnInit {
         let formattedStartMinute;
         let formattedEndHour;
         let formattedEndMinute;
-        if(dateStartParsed.getHours()-3 == 0){
+        if(dateStartParsed.getHours() == 0){
           formattedStartHour = "00";
         }
         else{
-          formattedStartHour = dateStartParsed.getHours()-3;
+          formattedStartHour = dateStartParsed.getHours();
         }
-        if(dateEndParsed.getHours()-3 == 0){
+        if(dateEndParsed.getHours() == 0){
           formattedEndHour = "00";
         }
         else{
-          formattedEndHour = dateEndParsed.getHours()-3;
+          formattedEndHour = dateEndParsed.getHours();
         }
         if(dateStartParsed.getMinutes() == 0){
           formattedStartMinute = "00";
