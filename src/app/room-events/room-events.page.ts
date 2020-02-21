@@ -103,26 +103,26 @@ export class RoomEventsPage implements OnInit {
             let formattedStartMinute;
             let formattedEndHour;
             let formattedEndMinute;
-            if(dateStartParsed.getHours() == 0){
-              formattedStartHour = "00";
+            if(dateStartParsed.getHours() >= 0 && dateStartParsed.getHours() <= 9){
+              formattedStartHour = "0"+dateStartParsed.getHours();
             }
             else{
               formattedStartHour = dateStartParsed.getHours();
             }
-            if(dateEndParsed.getHours() == 0){
-              formattedEndHour = "00";
+            if(dateEndParsed.getHours() >= 0 && dateEndParsed.getHours() <= 9){
+              formattedEndHour = "0"+dateEndParsed.getHours();
             }
             else{
               formattedEndHour = dateEndParsed.getHours();
             }
-            if(dateStartParsed.getMinutes() == 0){
-              formattedStartMinute = "00";
+            if(dateStartParsed.getMinutes() >= 0 && dateStartParsed.getMinutes() <= 9){
+              formattedStartMinute = "0"+dateStartParsed.getMinutes();
             }
             else{
               formattedStartMinute = dateStartParsed.getMinutes();
             }
-            if(dateEndParsed.getMinutes() == 0){
-              formattedEndMinute = "00";
+            if(dateEndParsed.getMinutes() >= 0 && dateEndParsed.getMinutes() <= 9){
+              formattedEndMinute = "0"+dateEndParsed.getMinutes();
             }
             else{
               formattedEndMinute = dateEndParsed.getMinutes()
@@ -143,26 +143,26 @@ export class RoomEventsPage implements OnInit {
           let formattedStartMinute;
           let formattedEndHour;
           let formattedEndMinute;
-          if(dateStartParsed.getHours() == 0){
-            formattedStartHour = "00";
+          if(dateStartParsed.getHours() >= 0 && dateStartParsed.getHours() <= 9){
+            formattedStartHour = "0"+dateStartParsed.getHours();
           }
           else{
             formattedStartHour = dateStartParsed.getHours();
           }
-          if(dateEndParsed.getHours() == 0){
-            formattedEndHour = "00";
+          if(dateEndParsed.getHours() >= 0 && dateEndParsed.getHours() <= 9){
+            formattedEndHour = "0"+dateEndParsed.getHours();
           }
           else{
             formattedEndHour = dateEndParsed.getHours();
           }
-          if(dateStartParsed.getMinutes() == 0){
-            formattedStartMinute = "00";
+          if(dateStartParsed.getMinutes() >= 0 && dateStartParsed.getMinutes() <= 9){
+            formattedStartMinute = "0"+dateStartParsed.getMinutes();
           }
           else{
             formattedStartMinute = dateStartParsed.getMinutes();
           }
-          if(dateEndParsed.getMinutes() == 0){
-            formattedEndMinute = "00";
+          if(dateEndParsed.getMinutes() >= 0 && dateEndParsed.getMinutes() <= 9){
+            formattedEndMinute = "0"+dateEndParsed.getMinutes();
           }
           else{
             formattedEndMinute = dateEndParsed.getMinutes()
@@ -214,26 +214,26 @@ export class RoomEventsPage implements OnInit {
               let formattedStartMinute;
               let formattedEndHour;
               let formattedEndMinute;
-              if(dateStartParsed.getHours() == 0){
-                formattedStartHour = "00";
+              if(dateStartParsed.getHours() >= 0 && dateStartParsed.getHours() <= 9){
+                formattedStartHour = "0"+dateStartParsed.getHours();
               }
               else{
                 formattedStartHour = dateStartParsed.getHours();
               }
-              if(dateEndParsed.getHours() == 0){
-                formattedEndHour = "00";
+              if(dateEndParsed.getHours() >= 0 && dateEndParsed.getHours() <= 9){
+                formattedEndHour = "0"+dateEndParsed.getHours();
               }
               else{
                 formattedEndHour = dateEndParsed.getHours();
               }
-              if(dateStartParsed.getMinutes() == 0){
-                formattedStartMinute = "00";
+              if(dateStartParsed.getMinutes() >= 0 && dateStartParsed.getMinutes() <= 9){
+                formattedStartMinute = "0"+dateStartParsed.getMinutes();
               }
               else{
                 formattedStartMinute = dateStartParsed.getMinutes();
               }
-              if(dateEndParsed.getMinutes() == 0){
-                formattedEndMinute = "00";
+              if(dateEndParsed.getMinutes() >= 0 && dateEndParsed.getMinutes() <= 9){
+                formattedEndMinute = "0"+dateEndParsed.getMinutes();
               }
               else{
                 formattedEndMinute = dateEndParsed.getMinutes()
@@ -254,26 +254,26 @@ export class RoomEventsPage implements OnInit {
             let formattedStartMinute;
             let formattedEndHour;
             let formattedEndMinute;
-            if(dateStartParsed.getHours() == 0){
-              formattedStartHour = "00";
+            if(dateStartParsed.getHours() >= 0 && dateStartParsed.getHours() <= 9){
+              formattedStartHour = "0"+dateStartParsed.getHours();
             }
             else{
               formattedStartHour = dateStartParsed.getHours();
             }
-            if(dateEndParsed.getHours() == 0){
-              formattedEndHour = "00";
+            if(dateEndParsed.getHours() >= 0 && dateEndParsed.getHours() <= 9){
+              formattedEndHour = "0"+dateEndParsed.getHours();
             }
             else{
               formattedEndHour = dateEndParsed.getHours();
             }
-            if(dateStartParsed.getMinutes() == 0){
-              formattedStartMinute = "00";
+            if(dateStartParsed.getMinutes() >= 0 && dateStartParsed.getMinutes() <= 9){
+              formattedStartMinute = "0"+dateStartParsed.getMinutes();
             }
             else{
               formattedStartMinute = dateStartParsed.getMinutes();
             }
             if(dateEndParsed.getMinutes() == 0){
-              formattedEndMinute = "00";
+              formattedEndMinute = "0"+dateEndParsed.getMinutes();
             }
             else{
               formattedEndMinute = dateEndParsed.getMinutes()
@@ -324,26 +324,26 @@ export class RoomEventsPage implements OnInit {
         let formattedStartMinute;
         let formattedEndHour;
         let formattedEndMinute;
-        if(dateStartParsed.getHours() == 0){
-          formattedStartHour = "00";
+        if(dateStartParsed.getHours() >= 0 && dateStartParsed.getHours() <= 9){
+          formattedStartHour = "0"+dateStartParsed.getHours();
         }
         else{
           formattedStartHour = dateStartParsed.getHours();
         }
-        if(dateEndParsed.getHours() == 0){
-          formattedEndHour = "00";
+        if(dateEndParsed.getHours() >= 0 && dateEndParsed.getHours() <= 9){
+          formattedEndHour = "0"+dateEndParsed.getHours();
         }
         else{
           formattedEndHour = dateEndParsed.getHours();
         }
-        if(dateStartParsed.getMinutes() == 0){
-          formattedStartMinute = "00";
+        if(dateStartParsed.getMinutes() >= 0 && dateStartParsed.getMinutes() <= 9){
+          formattedStartMinute = "0"+dateStartParsed.getMinutes();
         }
         else{
           formattedStartMinute = dateStartParsed.getMinutes();
         }
-        if(dateEndParsed.getMinutes() == 0){
-          formattedEndMinute = "00";
+        if(dateEndParsed.getMinutes() >= 0 && dateEndParsed.getMinutes() <= 9){
+          formattedEndMinute = "0"+dateEndParsed.getMinutes();
         }
         else{
           formattedEndMinute = dateEndParsed.getMinutes()
