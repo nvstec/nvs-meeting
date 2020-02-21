@@ -103,16 +103,28 @@
             font-size: 1.8em;
         }
 
-        .txt-next-events-room-events{
+        .txt-today-events-room-events{
             display: block;
             padding-left: 5%;
         }
 
-        .txt-next-events-description-room-events{
+        .scrollable-area-room-events{
             display: block;
-            padding-left: 5%;
-            font-weight: bold;
-            font-size: 1.4em;
+            margin-top: 5%;
+            overflow-y: auto;
+            height: 61vh;
+
+            .txt-next-events-room-events{
+                display: block;
+                padding-left: 5%;
+            }
+    
+            .txt-next-events-description-room-events{
+                display: block;
+                padding-left: 5%;
+                font-weight: bold;
+                font-size: 1.4em;
+            }
         }
     }
 }

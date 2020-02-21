@@ -28,13 +28,13 @@
           <ion-label class="txt-room-name-room-events">{{ roomName }}</ion-label>
           <br>
           <br>
-          <ion-label class="txt-next-events-room-events">Eventos de hoje :</ion-label>
-          <br>
-          <br>
-          <div *ngFor="let event of todayEventsArray">
-            <ion-label class="txt-next-events-room-events">{{event.formattedStartHour}}h{{event.formattedStartMinutes}} - {{event.formattedEndHour}}h{{event.formattedEndMinutes}}</ion-label>
-            <ion-label class="txt-next-events-description-room-events">{{ event.subject }}</ion-label><br>
-            <br>
+          <ion-label class="txt-today-events-room-events">Eventos de hoje :</ion-label>
+          <div class="scrollable-area-room-events">
+            <div *ngFor="let event of todayEventsArray">
+              <ion-label class="txt-next-events-room-events">{{event.formattedStartHour}}h{{event.formattedStartMinutes}} - {{event.formattedEndHour}}h{{event.formattedEndMinutes}}</ion-label>
+              <ion-label class="txt-next-events-description-room-events">{{ event.subject }}</ion-label><br>
+              <br>
+            </div>
           </div>
         </div>
       </ion-col>
