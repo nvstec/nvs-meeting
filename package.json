@@ -20,6 +20,7 @@
     "@angular/platform-browser-dynamic": "~8.2.14",
     "@angular/router": "~8.2.14",
     "@azure/msal-angular": "^0.1.4",
+    "@ionic-native/app-version": "^5.21.5",
     "@ionic-native/core": "^5.0.0",
     "@ionic-native/ms-adal": "^5.21.5",
     "@ionic-native/navigation-bar": "^5.21.5",
@@ -30,6 +31,7 @@
     "@ionic/storage": "^2.2.0",
     "@microsoft/microsoft-graph-client": "^2.0.0",
     "cordova-android": "8.1.0",
+    "cordova-plugin-app-version": "^0.1.9",
     "cordova-plugin-compat": "1.2.0",
     "cordova-plugin-fullscreen": "^1.2.0",
     "cordova-plugin-ms-adal": "0.10.2",
@@ -89,7 +91,8 @@
       "cordova-plugin-screen-orientation": {},
       "cordova-sqlite-storage": {},
       "cordova-plugin-fullscreen": {},
-      "cordova-plugin-navigationbar": {}
+      "cordova-plugin-navigationbar": {},
+      "cordova-plugin-app-version": {}
     },
     "platforms": [
       "android"

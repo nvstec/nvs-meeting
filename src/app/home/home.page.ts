@@ -4,6 +4,7 @@ import { LoadingController, AlertController } from '@ionic/angular';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router, NavigationExtras } from '@angular/router';
 import { Storage } from '@ionic/storage';
+import { AppVersion } from '@ionic-native/app-version/ngx';
 
 @Component({
   selector: 'app-home',
@@ -17,14 +18,28 @@ export class HomePage {
   isAuthenticated: boolean = false;
   token: any;
 
+  appV: any = '0.0.0';
+  appCode: any = '00000';
+
   constructor(
     private msAdal: MSAdal,
     private loadingCtrl: LoadingController,
     private http: HttpClient,
     private router: Router,
     private alertCtrl: AlertController,
+    private appVersion: AppVersion,
     private storage: Storage
   ) {
+    
+  }
+
+  ngOnInit(){
+    this.appVersion.getVersionNumber().then((res)=>{
+      this.appV = res;
+      this.appVersion.getVersionCode().then((res2)=>{
+        this.appCode = res2;
+      });
+    });
   }
 
   async signIn(): Promise<void>{
