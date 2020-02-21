@@ -12,10 +12,9 @@
         <div *ngIf="currentMeeting">
           <div class="left-container-busy-room-events">
             <ion-label class="txt-clock-room-events">{{clock | date:'HH:mm'}}</ion-label>
-              <ion-label class="txt-room-status-room-events">OCUPADO</ion-label>
+              <ion-label class="txt-room-status-room-events">OCUPADA</ion-label>
               <br>
-              <ion-label class="txt-room-description-room-event">{{currentMeeting.formattedStartHour}}h{{currentMeeting.formattedStartMinutes}} - {{currentMeeting.formattedEndHour}}h{{currentMeeting.formattedEndMinutes}}</ion-label>
-              <br>
+              <ion-label class="txt-room-event-time-room-event">{{currentMeeting.formattedStartHour}}:{{currentMeeting.formattedStartMinutes}} - {{currentMeeting.formattedEndHour}}:{{currentMeeting.formattedEndMinutes}}</ion-label>
               <ion-label class="txt-room-description-room-event">{{ currentMeeting.subject }}</ion-label>
               <ion-button class="btn-finalizar-room-event" (click)="finishMeetingClicked()">FINALIZAR</ion-button>
               <ion-button class="btn-extender-room-event" [disabled]="disabledExtendBtn" (click)="extendRoomClicked()">EXTENDER</ion-button>
@@ -28,7 +27,7 @@
           <ion-label class="txt-room-name-room-events">{{ roomName }}</ion-label>
           <br>
           <br>
-          <ion-label class="txt-today-events-room-events">Eventos de hoje :</ion-label>
+          <ion-label class="txt-today-events-room-events">Agendado para hoje:</ion-label>
           <div class="scrollable-area-room-events">
             <div *ngFor="let event of todayEventsArray">
               <ion-label class="txt-next-events-room-events">{{event.formattedStartHour}}h{{event.formattedStartMinutes}} - {{event.formattedEndHour}}h{{event.formattedEndMinutes}}</ion-label>

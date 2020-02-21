@@ -12,16 +12,18 @@
                 display: block;
                 font-size: 1.5em;
                 color: white;
-                padding-left: 5%;
-                padding-top: 5%;
+                padding-left: 3%;
+                padding-top: 3%;
+                font-family: 'muliextralight';
             }
 
             .txt-room-status-room-events{
                 display: block;
                 padding-top: 27%;
-                font-size: 6em;
+                font-size: 5em;
                 color: white;
                 text-align: center;
+                font-family: 'muliextralight';
             }
 
             .btn-usar-room-event{
@@ -38,7 +40,7 @@
         }
         
         .left-container-busy-room-events{
-            background-color: red;
+            background-color: #A8183F;
             height: 100vh;
             position: relative;
         
@@ -46,48 +48,66 @@
                 display: block;
                 font-size: 1.5em;
                 color: white;
-                padding-left: 5%;
-                padding-top: 5%;
+                padding-left: 3%;
+                padding-top: 3%;
+                font-family: 'muliextralight';
             }
 
             .txt-room-status-room-events{
                 display: block;
-                padding-top: 5%;
-                font-size: 6em;
+                padding-top: 27%;
+                font-size: 5em;
                 color: white;
                 text-align: center;
                 font-family: 'muliextralight';
             }
 
+            .txt-room-event-time-room-event{
+                display: block;
+                margin-top: 11%;
+                margin-left: 3%;
+                font-size: 1.3em;
+                color: white;
+                font-weight: bold;
+            }
+
             .txt-room-description-room-event{
                 display: block;
-                font-size: 2.4em;
+                margin-left: 3%;
+                font-size: 1.3em;
                 color: white;
-                text-align: center;
             }
 
             .btn-finalizar-room-event{
                 display: block;
                 position: absolute;
-                left: 20%;
-                bottom: 3%;
-                --background: white;
-                color: red;
-                width: 30vh;
-                height: 10vh;
-                font-size: 1.4em;
+                left: 3%;
+                bottom: 4%;
+                --background: #A8183F;
+                color: white;
+                width: 33vh;
+                height: 7vh;
+                font-size: 1.3em;
+                border: 2px solid white;
+                border-radius: 5px;
+                font-family: 'muliextralight';
+                padding-top: 1%;
             }
 
             .btn-extender-room-event{
                 display: block;
                 position: absolute;
-                left: 55%;
-                bottom: 3%;
-                --background: white;
-                color: red;
-                width: 30vh;
-                height: 10vh;
-                font-size: 1.4em;
+                left: 38%;
+                bottom: 4%;
+                --background: #A8183F;
+                color: white;
+                width: 33vh;
+                height: 7vh;
+                font-size: 1.3em;
+                border: 2px solid white;
+                border-radius: 5px;
+                font-family: 'muliextralight';
+                padding-top: 1%;
             }
         }
 
