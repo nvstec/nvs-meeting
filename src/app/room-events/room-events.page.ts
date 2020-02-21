@@ -179,7 +179,9 @@ export class RoomEventsPage implements OnInit {
         }
       }
     });
-    this.todayEventsArray.reverse();
+    this.todayEventsArray.sort(function(a,b){
+      return a.startHour - b.startHour;
+    });
   }
 
   async refreshTodayEventsArray(){
@@ -289,7 +291,9 @@ export class RoomEventsPage implements OnInit {
           }
         }
       });
-      newEventsArray.reverse();
+      newEventsArray.sort(function(a,b){
+        return a.startHour - b.startHour;
+      });
       this.todayEventsArray = newEventsArray;
       this.checkMeetingNow(res["value"]);
     }, err =>{
