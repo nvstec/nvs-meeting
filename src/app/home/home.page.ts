@@ -44,6 +44,16 @@ export class HomePage {
   ngOnInit(){
   }
 
+  async presentErrorAlert() {
+    const alert = await this.alertCtrl.create({
+      header: 'Erro!',
+      message: 'Ocorreu um erro ao realizar o login, tente novamente. Se o problema insistir contate o administrador local.',
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
+
   async signIn(): Promise<void>{
 
     const loading = await this.loadingCtrl.create({
@@ -102,7 +112,11 @@ export class HomePage {
                       this.router.navigate(['/rooms-list'],navigationExtras);
                     })
                   })
-                  .catch((e: any) => console.log('Authentication failed', e));
+                  .catch((e: any) => {
+                    loading.dismiss();
+                    console.log('Authentication failed', e);
+                    this.presentErrorAlert();
+                  });
                 }
               }
             ]
@@ -133,7 +147,11 @@ export class HomePage {
             this.router.navigate(['/rooms-list'],navigationExtras);
           })
         })
-        .catch((e: any) => console.log('Authentication failed', e));
+        .catch((e: any) => {
+          loading.dismiss();
+          console.log('Authentication failed', e);
+          this.presentErrorAlert();
+        });
       }
     });
   }
