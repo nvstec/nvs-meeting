@@ -80,7 +80,7 @@ export class RoomEventsModalPage implements OnInit {
       console.log("responseSilentToken",authResponse);
       this.storage.set('token',authResponse.accessToken);
       this.token = authResponse.accessToken;
-      let url = "https://graph.microsoft.com/v1.0/me/events";
+      let url = "https://graph.microsoft.com/v1.0/users/"+this.roomEmail+"/calendars/"+this.idCalendar+"/events";
 
       let body = {
         subject: this.eventName,
@@ -97,13 +97,6 @@ export class RoomEventsModalPage implements OnInit {
           locationEmailAddress: this.roomEmail
         },
         attendees: [
-          {
-            emailAddress: {
-              address: authResponse.userInfo.uniqueId,
-              name: authResponse.userInfo.displayableId
-            },
-            type: "required"
-          },
           {
             emailAddress: {
               address: this.roomEmail,
