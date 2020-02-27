@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MSAdal, AuthenticationContext, AuthenticationResult } from '@ionic-native/ms-adal/ngx';
-import { LoadingController, AlertController } from '@ionic/angular';
+import { LoadingController, AlertController, Platform } from '@ionic/angular';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router, NavigationExtras } from '@angular/router';
 import { Storage } from '@ionic/storage';
@@ -22,6 +22,7 @@ export class HomePage {
   appCode: any = '00000';
 
   constructor(
+    private platform: Platform,
     private msAdal: MSAdal,
     private loadingCtrl: LoadingController,
     private http: HttpClient,
@@ -30,16 +31,17 @@ export class HomePage {
     private appVersion: AppVersion,
     private storage: Storage
   ) {
-    
+    this.platform.ready().then(() => {
+      this.appVersion.getVersionNumber().then((res)=>{
+        this.appV = res;
+        this.appVersion.getVersionCode().then((res2)=>{
+          this.appCode = res2;
+        });
+      });
+    });
   }
 
   ngOnInit(){
-    this.appVersion.getVersionNumber().then((res)=>{
-      this.appV = res;
-      this.appVersion.getVersionCode().then((res2)=>{
-        this.appCode = res2;
-      });
-    });
   }
 
   async signIn(): Promise<void>{
