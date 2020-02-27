@@ -20,7 +20,7 @@
             .txt-room-status-room-events{
                 display: block;
                 padding-top: 27%;
-                font-size: 5em;
+                font-size: 10vw;
                 color: white;
                 text-align: center;
                 font-family: 'muliextralight';
@@ -60,7 +60,7 @@
             .txt-room-status-room-events{
                 display: block;
                 padding-top: 27%;
-                font-size: 5em;
+                font-size: 10vw;
                 color: white;
                 text-align: center;
                 font-family: 'muliextralight';
@@ -68,8 +68,9 @@
 
             .txt-room-event-time-room-event{
                 display: block;
-                margin-top: 14%;
-                margin-left: 3%;
+                position: absolute;
+                bottom: 20%;
+                left: 3%;
                 font-size: 1.3em;
                 color: white;
                 font-weight: bold;
@@ -77,7 +78,9 @@
 
             .txt-room-description-room-event{
                 display: block;
-                margin-left: 3%;
+                position: absolute;
+                bottom: 15%;
+                left: 3%;
                 font-size: 1.3em;
                 color: white;
             }
