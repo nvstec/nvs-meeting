@@ -4,3 +4,13 @@
     border-radius: 10px;
     margin-left: 5%;
 }
+
+:host {
+   .item-interactive.ion-valid{
+     --highlight-background: #063A69 !important;
+   }
+ }
+
+ion-radio {
+    --color-checked: #063A69;
+}
