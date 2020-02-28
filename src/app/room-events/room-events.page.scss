@@ -2,6 +2,14 @@
     padding: 0;
     overflow: hidden;
 
+    ::-webkit-scrollbar {
+        width: auto;
+      }
+
+    ::-webkit-scrollbar-thumb {
+        background: #063A69;
+    }
+
     .custom-row-room-events{
         height: 100vh;
 
@@ -149,7 +157,7 @@
                 margin-top: 9%;
                 overflow-y: auto;
                 height: 48.5vh;
-    
+                
                 .container-next-events-room-events{
                     background: #F4F4F4 0% 0% no-repeat padding-box;
                     padding: 5%;
