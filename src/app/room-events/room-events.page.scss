@@ -7,7 +7,7 @@
       }
 
     ::-webkit-scrollbar-thumb {
-        background: #063A69;
+        background: transparent;
     }
 
     .custom-row-room-events{
@@ -162,6 +162,7 @@
                     background: #F4F4F4 0% 0% no-repeat padding-box;
                     padding: 5%;
                     margin-top: 3%;
+                    border-radius: 5px;
                 }
     
                 .txt-next-events-room-events{
