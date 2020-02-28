@@ -145,6 +145,11 @@
             overflow-y: auto;
             height: 46vh;
 
+            .container-next-events-room-events{
+                background: #F4F4F4 0% 0% no-repeat padding-box;
+                padding: 5%;
+            }
+
             .txt-next-events-room-events{
                 display: block;
                 padding-left: 2%;

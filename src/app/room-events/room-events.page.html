@@ -31,8 +31,10 @@
           <ion-label class="txt-today-events-room-events">Agendado para hoje:</ion-label>
           <div class="scrollable-area-room-events">
             <div *ngFor="let event of todayEventsArray">
-              <ion-label class="txt-next-events-description-room-events">{{ event.subject }}</ion-label>
-              <ion-label class="txt-next-events-room-events">{{event.formattedStartHour}}:{{event.formattedStartMinutes}} - {{event.formattedEndHour}}:{{event.formattedEndMinutes}}</ion-label>
+              <div class="container-next-events-room-events" >
+                <ion-label class="txt-next-events-description-room-events">{{ event.subject }}</ion-label>
+                <ion-label class="txt-next-events-room-events">{{event.formattedStartHour}}:{{event.formattedStartMinutes}} - {{event.formattedEndHour}}:{{event.formattedEndMinutes}}</ion-label>
+              </div>
               <br>
             </div>
           </div>
