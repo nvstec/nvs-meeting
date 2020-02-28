@@ -1,5 +1,6 @@
 .custom-grid-room-events{
     padding: 0;
+    overflow: hidden;
 
     .custom-row-room-events{
         height: 100vh;
@@ -132,35 +133,57 @@
         .txt-room-name-room-events{
             display: block;
             font-size: 1.7em;
-            text-align: center;;
+            text-align: center;
+            padding-top: 4%;
         }
 
-        .txt-today-events-room-events{
-            display: block;
-        }
+        .container-global-next-events-room-events{
+            margin-top: 6.5%;
 
-        .scrollable-area-room-events{
-            display: block;
-            margin-top: 9%;
-            overflow-y: auto;
-            height: 46vh;
-
-            .container-next-events-room-events{
-                background: #F4F4F4 0% 0% no-repeat padding-box;
-                padding: 5%;
-            }
-
-            .txt-next-events-room-events{
+            .txt-today-events-room-events{
                 display: block;
-                padding-left: 2%;
             }
     
-            .txt-next-events-description-room-events{
+            .scrollable-area-room-events{
                 display: block;
-                padding-left: 2%;
-                font-weight: bold;
+                margin-top: 9%;
+                overflow-y: auto;
+                height: 48.5vh;
+    
+                .container-next-events-room-events{
+                    background: #F4F4F4 0% 0% no-repeat padding-box;
+                    padding: 5%;
+                }
+    
+                .txt-next-events-room-events{
+                    display: block;
+                    padding-left: 2%;
+                }
+        
+                .txt-next-events-description-room-events{
+                    display: block;
+                    padding-left: 2%;
+                    font-weight: bold;
+                }
             }
-        }
+            
+            .container-powered-by-room-events{
+                position: absolute;
+                bottom: 1.5%;
+
+                .label-powered-by-room-events{
+                    padding-left: 14%;
+                    font-size: 0.8em;
+                }
+        
+                .logo-powered-by-room-events{
+                    width: 16vw;
+                    height: 5.2vh;
+                    display: block;
+                    margin-left: -2%;
+                }
+            }
+        }     
     }
 }
 

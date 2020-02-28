@@ -24,19 +24,27 @@
       <ion-col class="custom-col-room-events" size="4">
         <div class="right-container-room-events">
           <img class="logo-room-events" src="../../assets/logo.svg">
-          <br>
           <ion-label class="txt-room-name-room-events">{{ roomName }}</ion-label>
-          <br>
-          <br>
-          <ion-label class="txt-today-events-room-events">Agendado para hoje:</ion-label>
-          <div class="scrollable-area-room-events">
-            <div *ngFor="let event of todayEventsArray">
-              <div class="container-next-events-room-events" >
-                <ion-label class="txt-next-events-description-room-events">{{ event.subject }}</ion-label>
-                <ion-label class="txt-next-events-room-events">{{event.formattedStartHour}}:{{event.formattedStartMinutes}} - {{event.formattedEndHour}}:{{event.formattedEndMinutes}}</ion-label>
+          <div class="container-global-next-events-room-events">
+            <ion-label class="txt-today-events-room-events">Agendado para hoje:</ion-label>
+            <div class="scrollable-area-room-events">
+              <div *ngFor="let event of todayEventsArray">
+                <div class="container-next-events-room-events" >
+                  <ion-label class="txt-next-events-description-room-events">{{ event.subject }}</ion-label>
+                  <ion-label class="txt-next-events-room-events">{{event.formattedStartHour}}:{{event.formattedStartMinutes}} - {{event.formattedEndHour}}:{{event.formattedEndMinutes}}</ion-label>
+                </div>
+                <br>
               </div>
-              <br>
             </div>
+            <br>
+            <ion-row class="container-powered-by-room-events">
+              <ion-col size="5">
+                <ion-label class="label-powered-by-room-events">powered by</ion-label>
+              </ion-col>
+              <ion-col size="7">
+                <img class="logo-powered-by-room-events" src="../../assets/nvstec-padrao.png">
+              </ion-col>
+            </ion-row>
           </div>
         </div>
       </ion-col>
