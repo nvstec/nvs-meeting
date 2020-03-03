@@ -4,7 +4,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content class="ion-padding" force-overscroll="false">
   <ion-label>Escolha uma sala abaixo</ion-label>
   <ion-list>
     <ion-item *ngFor="let room of obj" (click)="onSelectRoom(room)">
