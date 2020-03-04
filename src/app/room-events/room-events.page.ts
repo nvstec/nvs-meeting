@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import { MSAdal, AuthenticationContext, AuthenticationResult } from '@ionic-native/ms-adal/ngx';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { LoadingController, AlertController, ModalController } from '@ionic/angular';
+import { LoadingController, AlertController, ModalController, Platform } from '@ionic/angular';
 import * as moment from 'moment';
 import { RoomEventsModalPage } from '../room-events-modal/room-events-modal.page';
 import { RoomExtendModalPage } from '../room-extend-modal/room-extend-modal.page';
@@ -39,7 +39,8 @@ export class RoomEventsPage implements OnInit {
     public modalCtrl: ModalController,
     private storage: Storage,
     private navigationBar: NavigationBar,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private platform: Platform
   ) {
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
@@ -92,8 +93,19 @@ export class RoomEventsPage implements OnInit {
     array.forEach(element => {
       let dateStartParsed = new Date(element.start.dateTime);
       let dateEndParsed = new Date(element.end.dateTime);
-      let temp = moment(dateStartParsed).subtract(3,'h').format();
-      let temp2 = moment(dateEndParsed).subtract(3,'h').format();
+
+      let temp;
+      let temp2;
+
+      if(this.platform.is('ios')){
+        temp = moment(dateStartParsed).format();
+        temp2 = moment(dateEndParsed).format();
+      }
+      else{
+        temp = moment(dateStartParsed).subtract(3,'h').format();
+        temp2 = moment(dateEndParsed).subtract(3,'h').format();
+      }
+  
       dateStartParsed = new Date(temp);
       dateEndParsed = new Date(temp2);
       if(!element.isCancelled && dateStartParsed.getDate() == now.getDate() && dateStartParsed.getMonth() == now.getMonth() && dateStartParsed.getFullYear() == now.getFullYear() && dateStartParsed.getHours() >= now.getHours()){
@@ -188,23 +200,29 @@ export class RoomEventsPage implements OnInit {
     let now = new Date();
     let newEventsArray = [];
 
-    let authContext: AuthenticationContext = this.msAdal.createAuthenticationContext('https://login.windows.net/common');
-
-    authContext.acquireTokenSilentAsync('https://graph.microsoft.com', '03d4b82a-06df-4c21-99bd-ee5fec338c1f','').then((authResponse: AuthenticationResult) =>{
-      this.storage.set('token',authResponse.accessToken);
-      console.log("responseSilentToken",authResponse);
-      this.token = authResponse.accessToken;
-      let url = "https://graph.microsoft.com/v1.0/users/"+this.roomEmail+"/events";
+    let url = "https://graph.microsoft.com/v1.0/users/"+this.roomEmail+"/events";
 
     this.http.get(url,{
       headers: new HttpHeaders({"Authorization": "Bearer "+ this.token,"Content-Type":"application/json"})
     }).subscribe(res => {
+      console.log("token",this.token);
       console.log("refreshed events",res["value"]);
       res["value"].forEach(element => {
         let dateStartParsed = new Date(element.start.dateTime);
         let dateEndParsed = new Date(element.end.dateTime);
-        let temp = moment(dateStartParsed).subtract(3,'h').format();
-        let temp2 = moment(dateEndParsed).subtract(3,'h').format();
+
+        let temp;
+        let temp2;
+
+        if(this.platform.is('ios')){
+          temp = moment(dateStartParsed).format();
+          temp2 = moment(dateEndParsed).format();
+        }
+        else{
+          temp = moment(dateStartParsed).subtract(3,'h').format();
+          temp2 = moment(dateEndParsed).subtract(3,'h').format();
+        }
+
         dateStartParsed = new Date(temp);
         dateEndParsed = new Date(temp2);
         if(!element.isCancelled && dateStartParsed.getDate() == now.getDate() && dateStartParsed.getMonth() == now.getMonth() && dateStartParsed.getFullYear() == now.getFullYear() && dateStartParsed.getHours() >= now.getHours()){
@@ -297,26 +315,41 @@ export class RoomEventsPage implements OnInit {
       this.todayEventsArray = newEventsArray;
       this.checkMeetingNow(res["value"]);
     }, err =>{
-      console.log("erro", err);
+      console.log("get events api error", err);
       this.presentErrorAlert();
     })
-    }
-    ).catch((e: any) => console.log('Authentication failed', e));
   }
 
   checkMeetingNow(array:any){
-    console.log("checking for event right now");
     let foundMeeting = false;
     let now = new Date();
+    console.log("checking for event right now: ",now);
+
     array.forEach(element => {
       let dateStartParsed = new Date(element.start.dateTime);
       let dateEndParsed = new Date(element.end.dateTime);
-      let temp = moment(dateStartParsed).subtract(3,'h').format();
-      let temp2 = moment(dateEndParsed).subtract(3,'h').format();
+
+      let temp;
+      let temp2;
+
+      if(this.platform.is('ios')){
+        temp = moment(dateStartParsed).format();
+        temp2 = moment(dateEndParsed).format();
+      }
+      else{
+        temp = moment(dateStartParsed).subtract(3,'h').format();
+        temp2 = moment(dateEndParsed).subtract(3,'h').format();
+      }
+
       dateStartParsed = new Date(temp);
       dateEndParsed = new Date(temp2);
-      let meetingStart = moment(element.start.dateTime).subtract(3,'h').format();
-      let meetingEnd = moment(element.end.dateTime).subtract(3,'h').format();
+
+      let meetingStart;
+      let meetingEnd;
+
+      meetingStart = moment(dateStartParsed).format();
+      meetingEnd = moment(dateEndParsed).format();
+
       let nowFormatted = moment(now).format();
 
       if(!element.isCancelled && nowFormatted >= meetingStart && nowFormatted < meetingEnd){
@@ -553,41 +586,29 @@ export class RoomEventsPage implements OnInit {
           handler: () => {
             loading.present();
 
-            let authContext: AuthenticationContext = this.msAdal.createAuthenticationContext('https://login.windows.net/common');
+            let url = "https://graph.microsoft.com/v1.0/users/marine@nvstec.com/calendars/"+this.idCalendar+"/events/"+this.currentMeeting.eventId;
 
-            authContext.acquireTokenSilentAsync('https://graph.microsoft.com', '03d4b82a-06df-4c21-99bd-ee5fec338c1f','').then((authResponse: AuthenticationResult) => {
-              console.log("responseSilentToken",authResponse);
-              this.storage.set('token',authResponse.accessToken);
-              
-              let url = "https://graph.microsoft.com/v1.0/users/marine@nvstec.com/calendars/"+this.idCalendar+"/events/"+this.currentMeeting.eventId;
+            let now = new Date();
+            let meetingEnd = moment(now).format();
 
-              let now = new Date();
-              let meetingEnd = moment(now).format();
-
-              let body = {
-                end: {
-                  dateTime: meetingEnd,
-                  timeZone: "America/Sao_Paulo"
-                }
+            let body = {
+              end: {
+                dateTime: meetingEnd,
+                timeZone: "America/Sao_Paulo"
               }
+            }
 
-              this.http.patch(url, body, {
-                headers: new HttpHeaders({"Authorization": "Bearer "+ this.token,"Content-Type":"application/json"})
-              }).subscribe(res => {
-                loading.dismiss();
-
-                this.currentMeeting = null;
-              }, err =>{
-                loading.dismiss();
-                console.log("erro", err);
-                this.presentErrorEndMeetingAlert();
-              })
-              }
-            ).catch((e: any) => {
+            this.http.patch(url, body, {
+              headers: new HttpHeaders({"Authorization": "Bearer "+ this.token,"Content-Type":"application/json"})
+            }).subscribe(res => {
               loading.dismiss();
+
+              this.currentMeeting = null;
+            }, err =>{
+              loading.dismiss();
+              console.log("finish meeting api error", err);
               this.presentErrorEndMeetingAlert();
-              console.log('Authentication failed', e);
-            });
+            })
           }
         }
       ]
