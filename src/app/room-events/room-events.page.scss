@@ -125,6 +125,44 @@
                 font-family: 'muliextralight';
                 padding-top: 1%;
             }
+
+            @media only screen
+            and (min-device-width : 768px)
+            and (max-device-width : 1024px)
+            and (orientation : landscape)
+            and (-webkit-min-device-pixel-ratio: 2) {
+                .btn-finalizar-room-event{
+                    display: block;
+                    position: absolute;
+                    left: 3%;
+                    bottom: 4%;
+                    --background: #A8183F;
+                    color: white;
+                    width: 28vh;
+                    height: 6vh;
+                    font-size: 1.3em;
+                    border: 2px solid white;
+                    border-radius: 5px;
+                    font-family: 'muliextralight';
+                    padding: 0;
+                }
+
+                .btn-extender-room-event{
+                    display: block;
+                    position: absolute;
+                    left: 38%;
+                    bottom: 4%;
+                    --background: #A8183F;
+                    color: white;
+                    width: 28vh;
+                    height: 6vh;
+                    font-size: 1.3em;
+                    border: 2px solid white;
+                    border-radius: 5px;
+                    font-family: 'muliextralight';
+                    padding: 0;
+                }
+            }
         }
 
         .right-container-room-events{
@@ -184,6 +222,18 @@
                 .label-powered-by-room-events{
                     padding-left: 14%;
                     font-size: 0.8em;
+                }
+
+                @media only screen
+                and (min-device-width : 768px)
+                and (max-device-width : 1024px)
+                and (orientation : landscape)
+                and (-webkit-min-device-pixel-ratio: 2){
+                    .label-powered-by-room-events{
+                        padding-left: 27%;
+                        font-size: 0.9em;
+                        margin-top: 3%;
+                    }
                 }
         
                 .logo-powered-by-room-events{
