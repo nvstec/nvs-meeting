@@ -93,7 +93,7 @@ export class HomePage {
       
                   let authContext: AuthenticationContext = this.msAdal.createAuthenticationContext('https://login.windows.net/common');
     
-                  authContext.acquireTokenAsync('https://graph.microsoft.com', '03d4b82a-06df-4c21-99bd-ee5fec338c1f', 'com.nvstec.app.nvsmeeting://home','','')
+                  authContext.acquireTokenAsync('https://graph.microsoft.com', 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', 'com.nvstec.app.nvsmeeting://home','','')
                   .then((authResponse: AuthenticationResult) => {
                     loading2.dismiss();
                     this.storage.set('token',authResponse.accessToken);
@@ -129,7 +129,7 @@ export class HomePage {
     
         let authContext: AuthenticationContext = this.msAdal.createAuthenticationContext('https://login.windows.net/common');
     
-        authContext.acquireTokenAsync('https://graph.microsoft.com', '03d4b82a-06df-4c21-99bd-ee5fec338c1f', 'com.nvstec.app.nvsmeeting://home','','')
+        authContext.acquireTokenAsync('https://graph.microsoft.com', 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', 'com.nvstec.app.nvsmeeting://home','','')
         .then((authResponse: AuthenticationResult) => {
           this.storage.set('token',authResponse.accessToken);
           this.token = authResponse.accessToken;
