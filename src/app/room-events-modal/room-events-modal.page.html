@@ -1,0 +1,137 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Usar sala</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-item>
+    <ion-label position="floating">Nome do evento</ion-label>
+    <ion-input type="text" [(ngModel)]="eventName" (ionChange)="checkBtnEnabled($event)"></ion-input>
+  </ion-item>
+  <div *ngIf="nextEventStart">
+    <ion-list>
+      <ion-radio-group value="duration" [(ngModel)]="eventDuration" (ionChange)="checkBtnEnabled($event)">
+        <ion-list-header>
+          <ion-label>Duração</ion-label>
+        </ion-list-header>
+    
+        <div *ngIf="difference < 15 || difference == 15">
+          <ion-item lines="none">
+            <ion-label>Até a próxima reunião</ion-label>
+            <ion-radio slot="start" value="9999"></ion-radio>
+          </ion-item>
+        </div>
+
+        <div *ngIf="difference > 15 && (difference < 30 || difference == 30)">
+          <ion-item lines="none">
+            <ion-label>15 minutos</ion-label>
+            <ion-radio slot="start" value="15"></ion-radio>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label>Até a próxima reunião</ion-label>
+            <ion-radio slot="start" value="9999"></ion-radio>
+          </ion-item>
+        </div>
+
+        <div *ngIf="difference > 30 && (difference < 45 || difference == 45)">
+          <ion-item lines="none">
+            <ion-label>15 minutos</ion-label>
+            <ion-radio slot="start" value="15"></ion-radio>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label>30 minutos</ion-label>
+            <ion-radio slot="start" value="30"></ion-radio>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label>Até a próxima reunião</ion-label>
+            <ion-radio slot="start" value="9999"></ion-radio>
+          </ion-item>
+        </div>
+
+        <div *ngIf="difference > 45 && (difference < 60 || difference == 60)">
+          <ion-item lines="none">
+            <ion-label>15 minutos</ion-label>
+            <ion-radio slot="start" value="15"></ion-radio>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label>30 minutos</ion-label>
+            <ion-radio slot="start" value="30"></ion-radio>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label>45 minutos</ion-label>
+            <ion-radio slot="start" value="45"></ion-radio>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label>Até a próxima reunião</ion-label>
+            <ion-radio slot="start" value="9999"></ion-radio>
+          </ion-item>
+        </div>
+
+        <div *ngIf="difference > 60">
+          <ion-item lines="none">
+            <ion-label>15 minutos</ion-label>
+            <ion-radio slot="start" value="15"></ion-radio>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label>30 minutos</ion-label>
+            <ion-radio slot="start" value="30"></ion-radio>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label>45 minutos</ion-label>
+            <ion-radio slot="start" value="45"></ion-radio>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label>1 hora</ion-label>
+            <ion-radio slot="start" value="60"></ion-radio>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label>Até a próxima reunião</ion-label>
+            <ion-radio slot="start" value="9999"></ion-radio>
+          </ion-item>
+        </div>
+      </ion-radio-group>
+    </ion-list>
+  </div>
+  <div *ngIf="!nextEventStart">
+    <ion-list>
+      <ion-radio-group value="duration" [(ngModel)]="eventDuration" (ionChange)="checkBtnEnabled($event)">
+        <ion-list-header>
+          <ion-label>Duração</ion-label>
+        </ion-list-header>
+    
+        <ion-item lines="none">
+          <ion-label>15 minutos</ion-label>
+          <ion-radio slot="start" value="15"></ion-radio>
+        </ion-item>
+    
+        <ion-item lines="none">
+          <ion-label>30 minutos</ion-label>
+          <ion-radio slot="start" value="30"></ion-radio>
+        </ion-item>
+    
+        <ion-item lines="none">
+          <ion-label>45 minutos</ion-label>
+          <ion-radio slot="start" value="45"></ion-radio>
+        </ion-item>
+  
+        <ion-item lines="none">
+          <ion-label>1 hora</ion-label>
+          <ion-radio slot="start" value="60"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </ion-list>
+  </div>
+  <br>
+  <ion-button class="btn-agendar-room-events-modal" (click)="bookClicked()" [disabled]="isBookBtnDisabled">AGENDAR</ion-button>
+</ion-content>

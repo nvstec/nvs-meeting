@@ -4,8 +4,24 @@
   position: absolute;
   left: 0;
   right: 0;
-  top: 50%;
+  top: 45%;
   transform: translateY(-50%);
+
+  .logo-home{
+    width: 67%;
+    display: block;
+    padding-left: 35%;
+  }
+
+  .btn-entrar-home{
+    --background: #063A69;
+  }
+}
+
+.txt-version-home{
+  position: absolute;
+  bottom: 3%;
+  left:3%;
 }
 
 #container strong {

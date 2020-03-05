@@ -1,10 +1,12 @@
-// Ionic Variables and Theming. For more info, please see:
-// http://ionicframework.com/docs/theming/
+@import "../assets/fonts/muli-font.css";
 
-/** Ionic CSS Variables **/
+* {
+  font-family: 'muliregular';
+}
+
 :root {
   /** primary **/
-  --ion-color-primary: #3880ff;
+  --ion-color-primary: #063A69;
   --ion-color-primary-rgb: 56, 128, 255;
   --ion-color-primary-contrast: #ffffff;
   --ion-color-primary-contrast-rgb: 255, 255, 255;
@@ -74,4 +76,64 @@
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
+}
+
+.custom-room-events-modal .modal-wrapper{
+  width: 50% !important;
+  height: 78% !important;
+  border-radius: 10px !important;
+}
+
+.custom-case-1-room-events-modal .modal-wrapper{
+  width: 50% !important;
+  height: 54% !important;
+  border-radius: 10px !important;
+}
+
+.custom-case-2-room-events-modal .modal-wrapper{
+  width: 50% !important;
+  height: 62% !important;
+  border-radius: 10px !important;
+}
+
+.custom-case-3-room-events-modal .modal-wrapper{
+  width: 50% !important;
+  height: 70% !important;
+  border-radius: 10px !important;
+}
+
+.custom-case-4-room-events-modal .modal-wrapper{
+  width: 50% !important;
+  height: 85% !important;
+  border-radius: 10px !important;
+}
+
+.custom-extend-events-modal .modal-wrapper{
+  width: 50% !important;
+  height: 69% !important;
+  border-radius: 10px !important;
+}
+
+.custom-extend-events-next-event-modal .modal-wrapper{
+  width: 50% !important;
+  height: 77% !important;
+  border-radius: 10px !important;
+}
+
+.custom-extend-events-case-1-next-event-modal .modal-wrapper{
+  width: 50% !important;
+  height: 45% !important;
+  border-radius: 10px !important;
+}
+
+.custom-extend-events-case-2-next-event-modal .modal-wrapper{
+  width: 50% !important;
+  height: 53% !important;
+  border-radius: 10px !important;
+}
+
+.custom-extend-events-case-3-next-event-modal .modal-wrapper{
+  width: 50% !important;
+  height: 61% !important;
+  border-radius: 10px !important;
 }

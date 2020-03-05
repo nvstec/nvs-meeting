@@ -1,0 +1,251 @@
+.custom-grid-room-events{
+    padding: 0;
+    overflow: hidden;
+
+    ::-webkit-scrollbar {
+        width: auto;
+      }
+
+    ::-webkit-scrollbar-thumb {
+        background: transparent;
+    }
+
+    .custom-row-room-events{
+        height: 100vh;
+
+        .left-container-free-room-events{
+            background-color: #063A69;
+            height: 100vh;
+        
+            .txt-clock-room-events{
+                display: block;
+                font-size: 1.5em;
+                color: white;
+                padding-left: 3%;
+                padding-top: 3%;
+                font-family: 'muliextralight';
+            }
+
+            .txt-room-status-room-events{
+                display: block;
+                padding-top: 27%;
+                font-size: 10vw;
+                color: white;
+                text-align: center;
+                font-family: 'muliextralight';
+            }
+
+            .btn-usar-room-event{
+                display: block;
+                position: absolute;
+                left: 3%;
+                bottom: 4%;
+                --background: #063A69;
+                color: white;
+                width: 33vh;
+                height: 7vh;
+                font-size: 1.3em;
+                border: 2px solid white;
+                border-radius: 5px;
+                font-family: 'muliextralight';
+                padding-top: 1%;
+            }
+        }
+        
+        .left-container-busy-room-events{
+            background-color: #A8183F;
+            height: 100vh;
+            position: relative;
+        
+            .txt-clock-room-events{
+                display: block;
+                font-size: 1.5em;
+                color: white;
+                padding-left: 3%;
+                padding-top: 3%;
+                font-family: 'muliextralight';
+            }
+
+            .txt-room-status-room-events{
+                display: block;
+                padding-top: 27%;
+                font-size: 10vw;
+                color: white;
+                text-align: center;
+                font-family: 'muliextralight';
+            }
+
+            .txt-room-event-time-room-event{
+                display: block;
+                position: absolute;
+                bottom: 20%;
+                left: 3%;
+                font-size: 1.3em;
+                color: white;
+                font-weight: bold;
+            }
+
+            .txt-room-description-room-event{
+                display: block;
+                position: absolute;
+                bottom: 15%;
+                left: 3%;
+                font-size: 1.3em;
+                color: white;
+            }
+
+            .btn-finalizar-room-event{
+                display: block;
+                position: absolute;
+                left: 3%;
+                bottom: 4%;
+                --background: #A8183F;
+                color: white;
+                width: 33vh;
+                height: 7vh;
+                font-size: 1.3em;
+                border: 2px solid white;
+                border-radius: 5px;
+                font-family: 'muliextralight';
+                padding-top: 1%;
+            }
+
+            .btn-extender-room-event{
+                display: block;
+                position: absolute;
+                left: 38%;
+                bottom: 4%;
+                --background: #A8183F;
+                color: white;
+                width: 33vh;
+                height: 7vh;
+                font-size: 1.3em;
+                border: 2px solid white;
+                border-radius: 5px;
+                font-family: 'muliextralight';
+                padding-top: 1%;
+            }
+
+            @media only screen
+            and (min-device-width : 768px)
+            and (max-device-width : 1024px)
+            and (orientation : landscape)
+            and (-webkit-min-device-pixel-ratio: 2) {
+                .btn-finalizar-room-event{
+                    display: block;
+                    position: absolute;
+                    left: 3%;
+                    bottom: 4%;
+                    --background: #A8183F;
+                    color: white;
+                    width: 28vh;
+                    height: 6vh;
+                    font-size: 1.3em;
+                    border: 2px solid white;
+                    border-radius: 5px;
+                    font-family: 'muliextralight';
+                    padding: 0;
+                }
+
+                .btn-extender-room-event{
+                    display: block;
+                    position: absolute;
+                    left: 38%;
+                    bottom: 4%;
+                    --background: #A8183F;
+                    color: white;
+                    width: 28vh;
+                    height: 6vh;
+                    font-size: 1.3em;
+                    border: 2px solid white;
+                    border-radius: 5px;
+                    font-family: 'muliextralight';
+                    padding: 0;
+                }
+            }
+        }
+
+        .right-container-room-events{
+            padding: 6%;
+        }
+
+        .logo-room-events{
+            width: 32vw;
+            height: 17vh;
+            display: block;
+            padding: 1%;
+        }
+        
+        .txt-room-name-room-events{
+            display: block;
+            font-size: 1.7em;
+            text-align: center;
+            padding-top: 4%;
+        }
+
+        .container-global-next-events-room-events{
+            margin-top: 6.5%;
+
+            .txt-today-events-room-events{
+                display: block;
+            }
+    
+            .scrollable-area-room-events{
+                display: block;
+                margin-top: 6%;
+                overflow-y: auto;
+                height: 48.5vh;
+                
+                .container-next-events-room-events{
+                    background: #F4F4F4 0% 0% no-repeat padding-box;
+                    padding: 5%;
+                    margin-top: 3%;
+                    border-radius: 5px;
+                }
+    
+                .txt-next-events-room-events{
+                    display: block;
+                    padding-left: 2%;
+                }
+        
+                .txt-next-events-description-room-events{
+                    display: block;
+                    padding-left: 2%;
+                    font-weight: bold;
+                }
+            }
+            
+            .container-powered-by-room-events{
+                position: absolute;
+                bottom: 1.5%;
+
+                .label-powered-by-room-events{
+                    padding-left: 14%;
+                    font-size: 0.8em;
+                }
+
+                @media only screen
+                and (min-device-width : 768px)
+                and (max-device-width : 1024px)
+                and (orientation : landscape)
+                and (-webkit-min-device-pixel-ratio: 2){
+                    .label-powered-by-room-events{
+                        padding-left: 27%;
+                        font-size: 0.9em;
+                        margin-top: 3%;
+                    }
+                }
+        
+                .logo-powered-by-room-events{
+                    width: 87%;
+                    display: block;
+                    margin-left: -10%;
+                }
+            }
+        }     
+    }
+}
+
+.custom-col-room-events{
+    padding: 0;
+}
