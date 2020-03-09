@@ -615,4 +615,21 @@ export class RoomEventsPage implements OnInit {
     });
     await alert.present();
   }
+
+  async anticipateMeeting(meetingName){
+    const alert = await this.alertCtrl.create({
+      header: meetingName,
+      message: 'Confirmar início da reunião?',
+      buttons: [{
+        text: 'Sim',
+        role: 'cancel',
+      },
+      {
+        text: 'Não',
+        role: 'cancel',
+      }]
+    });
+
+    await alert.present();
+  }
 }

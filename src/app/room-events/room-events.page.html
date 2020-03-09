@@ -28,10 +28,13 @@
           <div class="container-global-next-events-room-events">
             <ion-label class="txt-today-events-room-events">Agendado para hoje:</ion-label>
             <div class="scrollable-area-room-events">
-              <div *ngFor="let event of todayEventsArray">
+              <div *ngFor="let event of todayEventsArray; let i = index">
                 <div class="container-next-events-room-events" >
                   <ion-label class="txt-next-events-description-room-events">{{ event.subject }}</ion-label>
                   <ion-label class="txt-next-events-room-events">{{event.formattedStartHour}}:{{event.formattedStartMinutes}} - {{event.formattedEndHour}}:{{event.formattedEndMinutes}}</ion-label>
+                  <div *ngIf="i == 0 && !currentMeeting" (click)="anticipateMeeting(event.subject)">
+                    <ion-button>Iniciar agora</ion-button>
+                  </div>
                 </div>
               </div>
             </div>
