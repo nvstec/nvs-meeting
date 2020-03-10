@@ -88,6 +88,16 @@ export class RoomEventsPage implements OnInit {
     await alert.present();
   }
 
+  async presentErrorAnticipateMeetingAlert() {
+    const alert = await this.alertCtrl.create({
+      header: 'Erro!',
+      message: 'Ocorreu um erro ao antecipar o evento.',
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
+
   createTodayEventsArray(array:any){
     let now = new Date();
     array.forEach(element => {
@@ -617,13 +627,44 @@ export class RoomEventsPage implements OnInit {
   }
 
   async anticipateMeeting(meetingName){
+
+    const loading = await this.loadingCtrl.create({
+      message: 'Antecipando reunião'
+    });
+
     const alert = await this.alertCtrl.create({
       header: meetingName,
       message: 'Confirmar início da reunião?',
       buttons: [{
         text: 'Sim',
-        role: 'cancel',
-      },
+        handler: () => {
+
+          loading.present();
+
+          let url = "https://graph.microsoft.com/v1.0/users/marine@nvstec.com/calendars/"+this.idCalendar+"/events/"+this.todayEventsArray[0].eventId;
+
+          let now = new Date();
+          let meetingStart = moment(now).format();
+
+          let body = {
+            start: {
+              dateTime: meetingStart,
+              timeZone: "America/Sao_Paulo"
+            }
+          }
+
+          this.http.patch(url, body, {
+            headers: new HttpHeaders({"Authorization": "Bearer "+ this.token,"Content-Type":"application/json"})
+          }).subscribe(res => {
+            loading.dismiss();
+            this.clock = moment(now).format();
+            this.refreshTodayEventsArray();
+          }, err =>{
+            loading.dismiss();
+            console.log("finish meeting api error", err);
+            this.presentErrorAnticipateMeetingAlert();
+          })
+      }},
       {
         text: 'Não',
         role: 'cancel',
