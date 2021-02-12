@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router, NavigationExtras } from '@angular/router';
 import { Storage } from '@ionic/storage';
 import { AppVersion } from '@ionic-native/app-version/ngx';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -93,7 +94,7 @@ export class HomePage {
       
                   let authContext: AuthenticationContext = this.msAdal.createAuthenticationContext('https://login.windows.net/common');
     
-                  authContext.acquireTokenAsync('https://graph.microsoft.com', 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', 'com.nvstec.app.nvsmeeting://home','','')
+                  authContext.acquireTokenAsync('https://graph.microsoft.com', environment.AZURE_CLIENT_ID, 'com.nvstec.app.nvsmeeting://home','','')
                   .then((authResponse: AuthenticationResult) => {
                     loading2.dismiss();
                     this.storage.set('token',authResponse.accessToken);
@@ -129,7 +130,7 @@ export class HomePage {
     
         let authContext: AuthenticationContext = this.msAdal.createAuthenticationContext('https://login.windows.net/common');
     
-        authContext.acquireTokenAsync('https://graph.microsoft.com', 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', 'com.nvstec.app.nvsmeeting://home','','')
+        authContext.acquireTokenAsync('https://graph.microsoft.com', environment.AZURE_CLIENT_ID, 'com.nvstec.app.nvsmeeting://home','','')
         .then((authResponse: AuthenticationResult) => {
           this.storage.set('token',authResponse.accessToken);
           this.token = authResponse.accessToken;
