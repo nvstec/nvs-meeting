@@ -11,5 +11,6 @@ cache:
 test_build_android:
   script:
     - npm install
+    - npm install -g ionic@latest
     - ionic cordova build android
     

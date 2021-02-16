@@ -6,7 +6,7 @@
           <div class="left-container-free-room-events">
             <ion-label class="txt-clock-room-events">{{clock | date:'HH:mm'}}</ion-label>
               <ion-label class="txt-room-status-room-events">LIVRE</ion-label>
-              <ion-button class="btn-usar-room-event" (click)="useRoomClicked()">USAR</ion-button>
+              <ion-button [ngClass]="btnUsarCssClass" (click)="useRoomClicked()">USAR</ion-button>
           </div>
         </div>
         <div *ngIf="currentMeeting">
@@ -16,8 +16,8 @@
               <br>
               <ion-label class="txt-room-event-time-room-event">{{currentMeeting.formattedStartHour}}:{{currentMeeting.formattedStartMinutes}} - {{currentMeeting.formattedEndHour}}:{{currentMeeting.formattedEndMinutes}}</ion-label>
               <ion-label class="txt-room-description-room-event">{{ currentMeeting.subject }}</ion-label>
-              <ion-button class="btn-finalizar-room-event" (click)="finishMeetingClicked()">FINALIZAR</ion-button>
-              <ion-button class="btn-extender-room-event" [disabled]="disabledExtendBtn" (click)="extendRoomClicked()">EXTENDER</ion-button>
+              <ion-button [ngClass]="btnFinalizarCssClass" (click)="finishMeetingClicked()">FINALIZAR</ion-button>
+              <ion-button [ngClass]="btnExtenderCssClass" [disabled]="disabledExtendBtn" (click)="extendRoomClicked()">EXTENDER</ion-button>
           </div>
         </div>
       </ion-col>
