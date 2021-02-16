@@ -30,6 +30,10 @@ export class RoomEventsPage implements OnInit {
 
   disabledExtendBtn: boolean = false;
 
+  btnUsarCssClass = 'btn-usar-room-event'
+  btnFinalizarCssClass = 'btn-finalizar-room-event'
+  btnExtenderCssClass = 'btn-extender-room-event'
+
   constructor(
     private msAdal: MSAdal,
     private route: ActivatedRoute,
@@ -414,6 +418,12 @@ export class RoomEventsPage implements OnInit {
 
   async useRoomClicked(){
 
+    this.btnUsarCssClass = 'btn-usar-room-event-selected';
+
+    setTimeout(() => {
+      this.btnUsarCssClass = 'btn-usar-room-event';
+    }, 250);
+
     let cssClass = 'custom-case-4-room-events-modal';
     let modal:any;
 
@@ -490,6 +500,12 @@ export class RoomEventsPage implements OnInit {
   }
 
   async extendRoomClicked(){
+
+    this.btnExtenderCssClass = 'btn-extender-room-event-selected';
+
+    setTimeout(() => {
+      this.btnExtenderCssClass = 'btn-extender-room-event';
+    }, 250);
 
     let cssClass = 'custom-extend-events-next-event-modal';
     let modal:any;
@@ -569,6 +585,12 @@ export class RoomEventsPage implements OnInit {
   }
  
   async finishMeetingClicked(){
+
+    this.btnFinalizarCssClass = 'btn-finalizar-room-event-selected';
+
+    setTimeout(() => {
+      this.btnFinalizarCssClass = 'btn-finalizar-room-event';
+    }, 250);
 
     const loading = await this.loadingCtrl.create({
       message: 'Encerrando reunião'
