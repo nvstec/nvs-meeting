@@ -134,7 +134,7 @@ export class HomePage {
         .then((authResponse: AuthenticationResult) => {
           this.storage.set('token',authResponse.accessToken);
           this.token = authResponse.accessToken;
-          console.log("token",this.token);
+          console.log("authResponse",authResponse);
           this.http.get("https://graph.microsoft.com/beta/me/findRooms",{
             headers: new HttpHeaders({"Authorization": "Bearer "+ authResponse.accessToken,"Content-Type":"application/json"})
           }).subscribe(res => {
