@@ -48,7 +48,20 @@
                 border: 2px solid white;
                 border-radius: 5px;
                 font-family: 'muliextralight';
-                padding-top: 1%;
+            }
+
+            .btn-usar-room-event-selected{
+                display: block;
+                position: absolute;
+                left: 3%;
+                bottom: 4%;
+                --background: white;
+                color: #063A69;
+                width: 33vh;
+                height: 7vh;
+                font-size: 1.3em;
+                border-radius: 5px;
+                font-family: 'muliextralight';
             }
         }
         
@@ -107,7 +120,20 @@
                 border: 2px solid white;
                 border-radius: 5px;
                 font-family: 'muliextralight';
-                padding-top: 1%;
+            }
+
+            .btn-finalizar-room-event-selected{
+                display: block;
+                position: absolute;
+                left: 3%;
+                bottom: 4%;
+                --background: white;
+                color: #A8183F;
+                width: 33vh;
+                height: 7vh;
+                font-size: 1.3em;
+                border-radius: 5px;
+                font-family: 'muliextralight';
             }
 
             .btn-extender-room-event{
@@ -123,7 +149,20 @@
                 border: 2px solid white;
                 border-radius: 5px;
                 font-family: 'muliextralight';
-                padding-top: 1%;
+            }
+
+            .btn-extender-room-event-selected{
+                display: block;
+                position: absolute;
+                left: 38%;
+                bottom: 4%;
+                --background: white;
+                color: #A8183F;
+                width: 33vh;
+                height: 7vh;
+                font-size: 1.3em;
+                border-radius: 5px;
+                font-family: 'muliextralight';
             }
 
             @media only screen

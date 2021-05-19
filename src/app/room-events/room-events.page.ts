@@ -8,6 +8,7 @@ import { RoomEventsModalPage } from '../room-events-modal/room-events-modal.page
 import { RoomExtendModalPage } from '../room-extend-modal/room-extend-modal.page';
 import { Storage } from '@ionic/storage';
 import { NavigationBar } from '@ionic-native/navigation-bar/ngx';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-room-events',
@@ -29,6 +30,10 @@ export class RoomEventsPage implements OnInit {
   currentMeeting: any = null;
 
   disabledExtendBtn: boolean = false;
+
+  btnUsarCssClass = 'btn-usar-room-event'
+  btnFinalizarCssClass = 'btn-finalizar-room-event'
+  btnExtenderCssClass = 'btn-extender-room-event'
 
   constructor(
     private msAdal: MSAdal,
@@ -73,6 +78,22 @@ export class RoomEventsPage implements OnInit {
       header: 'Erro!',
       message: 'Ocorreu um erro ao atualizar os eventos.',
       buttons: ['OK']
+    });
+
+    await alert.present();
+  }
+
+  async presentAuthenticationErrorAlert() {
+    const alert = await this.alertCtrl.create({
+      header: 'Erro!',
+      message: 'Sua sessão expirou. Por favor faça novamente o login',
+      buttons: [{
+        text: 'OK',
+        handler: () => {
+          this.storage.set('token',null);
+          this.router.navigate(['/home']);
+        }
+      }]
     });
 
     await alert.present();
@@ -316,7 +337,17 @@ export class RoomEventsPage implements OnInit {
       this.checkMeetingNow(res["value"]);
     }, err =>{
       console.log("get events api error", err);
-      this.presentErrorAlert();
+      let authContext: AuthenticationContext = this.msAdal.createAuthenticationContext('https://login.windows.net/common');
+
+      authContext.acquireTokenSilentAsync('https://graph.microsoft.com', environment.AZURE_CLIENT_ID, '')
+      .then((authResponse: AuthenticationResult) => {
+        this.storage.set('token',authResponse.accessToken);
+        this.token = authResponse.accessToken;
+        console.log("authResponse",authResponse);
+      })
+      .catch((e: any) => {
+        this.presentAuthenticationErrorAlert();
+      });
     })
   }
 
@@ -414,6 +445,12 @@ export class RoomEventsPage implements OnInit {
 
   async useRoomClicked(){
 
+    this.btnUsarCssClass = 'btn-usar-room-event-selected';
+
+    setTimeout(() => {
+      this.btnUsarCssClass = 'btn-usar-room-event';
+    }, 250);
+
     let cssClass = 'custom-case-4-room-events-modal';
     let modal:any;
 
@@ -490,6 +527,12 @@ export class RoomEventsPage implements OnInit {
   }
 
   async extendRoomClicked(){
+
+    this.btnExtenderCssClass = 'btn-extender-room-event-selected';
+
+    setTimeout(() => {
+      this.btnExtenderCssClass = 'btn-extender-room-event';
+    }, 250);
 
     let cssClass = 'custom-extend-events-next-event-modal';
     let modal:any;
@@ -569,6 +612,12 @@ export class RoomEventsPage implements OnInit {
   }
  
   async finishMeetingClicked(){
+
+    this.btnFinalizarCssClass = 'btn-finalizar-room-event-selected';
+
+    setTimeout(() => {
+      this.btnFinalizarCssClass = 'btn-finalizar-room-event';
+    }, 250);
 
     const loading = await this.loadingCtrl.create({
       message: 'Encerrando reunião'
