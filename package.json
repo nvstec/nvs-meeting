@@ -51,7 +51,7 @@
     "dotenv": "^8.2.0",
     "es6-promise-plugin": "^4.2.2",
     "ionic": "^5.4.16",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "moment-timezone": "^0.5.27",
     "path": "^0.12.7",
     "rxjs": "^6.5.4",
